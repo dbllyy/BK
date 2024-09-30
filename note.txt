@@ -173,6 +173,23 @@ CREATE TABLE Catatan (
 );
 
 
+
+/////////////////////////////////////////
+ALUR MIKIR!!
+
+1. tabel 
+2. ERD
+3. migrations
+4. model & controller
+
+
+////////////////////////////////////////
+
+1. komputer = no, id cabang, merek, kondisi(baru, second), timestamps
+2. service = no, id.cabang, merek, tipe service (hardare/software/jaringan), status)
+3. berita acara (no, id cabang, )
+
+
 ///////////////////////////////////////////
 NOTE DARI KA JODA
 
@@ -187,20 +204,6 @@ NOTE DARI KA JODA
     - ceklist
     - selesai(timestamp, berita acara = hari tanggal, nama teknisi, pihak ke 2)
     - tanggal ambil
-
-/////////////////////////////////////////
-ALUR MIKIR!!
-
-1. tabel 
-2. ERD
-3. migrations
-4. model & controller
-
-
-////////////////////////////////////////
-
-komputer (no, id cabang, merek, masalah, )
-
 
 ///////////////////
 
