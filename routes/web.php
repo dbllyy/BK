@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('index');
@@ -16,5 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('login', function () {
+    return view('auth.login'); // Make sure you create this view
+})->name('login');
+
+// Handle the login request
+Route::post('login', [LoginController::class, 'login']);
 
 require __DIR__.'/auth.php';

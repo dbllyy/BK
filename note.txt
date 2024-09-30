@@ -1,0 +1,203 @@
+-- Tabel untuk pengguna
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk tugas
+CREATE TABLE Tasks (
+    TaskID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(100) NOT NULL,
+    Description TEXT,
+    AssignedTo INT,
+    Status ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    DueDate DATETIME,
+    FOREIGN KEY (AssignedTo) REFERENCES Users(UserID)
+);
+
+-- Tabel untuk instalasi
+CREATE TABLE Installations (
+    InstallationID INT PRIMARY KEY AUTO_INCREMENT,
+    SoftwareName VARCHAR(100) NOT NULL,
+    Version VARCHAR(20),
+    InstalledDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Tabel untuk proses
+CREATE TABLE Processes (
+    ProcessID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    StartTime DATETIME,
+    EndTime DATETIME,
+    Status ENUM('Running', 'Paused', 'Completed') DEFAULT 'Running',
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk pengiriman
+CREATE TABLE Deliveries (
+    DeliveryID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    DeliveryDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Pending', 'Delivered', 'Failed') DEFAULT 'Pending',
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk penerimaan
+CREATE TABLE Receipts (
+    ReceiptID INT PRIMARY KEY AUTO_INCREMENT,
+    DeliveryID INT,
+    ReceivedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Pending', 'Received', 'Rejected') DEFAULT 'Pending',
+    FOREIGN KEY (DeliveryID) REFERENCES Deliveries(DeliveryID)
+);
+
+-- Tabel untuk spesifikasi
+CREATE TABLE Specifications (
+    SpecID INT PRIMARY KEY AUTO_INCREMENT,
+    SpecType ENUM('Hardware', 'Software'),
+    SpecDescription TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk catatan kerusakan
+CREATE TABLE Issues (
+    IssueID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    Description TEXT,
+    Status ENUM('Open', 'In Progress', 'Resolved') DEFAULT 'Open',
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID)
+);
+
+-- Tabel untuk catatan
+CREATE TABLE Notes (
+    NoteID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    NoteText TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+
+///////////////////////////////////////
+
+-- Tabel untuk pengguna
+CREATE TABLE Pengguna (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    NamaPengguna VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk tugas
+CREATE TABLE Tugas (
+    TaskID INT PRIMARY KEY AUTO_INCREMENT,
+    Judul VARCHAR(100) NOT NULL,
+    Deskripsi TEXT,
+    DitugaskanKepada INT,
+    Status ENUM('Menunggu', 'Dalam Proses', 'Selesai') DEFAULT 'Menunggu',
+    DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP,
+    TenggatWaktu DATETIME,
+    FOREIGN KEY (DitugaskanKepada) REFERENCES Pengguna(UserID)
+);
+
+-- Tabel untuk instalasi
+CREATE TABLE Instalasi (
+    InstallationID INT PRIMARY KEY AUTO_INCREMENT,
+    NamaSoftware VARCHAR(100) NOT NULL,
+    Versi VARCHAR(20),
+    TanggalInstalasi DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Pengguna(UserID)
+);
+
+-- Tabel untuk proses
+CREATE TABLE Proses (
+    ProcessID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    WaktuMulai DATETIME,
+    WaktuSelesai DATETIME,
+    Status ENUM('Berjalan', 'Dijeda', 'Selesai') DEFAULT 'Berjalan',
+    FOREIGN KEY (TaskID) REFERENCES Tugas(TaskID)
+);
+
+-- Tabel untuk pengiriman
+CREATE TABLE Pengiriman (
+    DeliveryID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    TanggalPengiriman DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Menunggu', 'Dikirim', 'Gagal') DEFAULT 'Menunggu',
+    FOREIGN KEY (TaskID) REFERENCES Tugas(TaskID)
+);
+
+-- Tabel untuk penerimaan
+CREATE TABLE Penerimaan (
+    ReceiptID INT PRIMARY KEY AUTO_INCREMENT,
+    DeliveryID INT,
+    TanggalDiterima DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Status ENUM('Menunggu', 'Diterima', 'Ditolak') DEFAULT 'Menunggu',
+    FOREIGN KEY (DeliveryID) REFERENCES Pengiriman(DeliveryID)
+);
+
+-- Tabel untuk spesifikasi
+CREATE TABLE Spesifikasi (
+    SpecID INT PRIMARY KEY AUTO_INCREMENT,
+    TipeSpesifikasi ENUM('Perangkat Keras', 'Perangkat Lunak'),
+    DeskripsiSpesifikasi TEXT,
+    DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk catatan kerusakan
+CREATE TABLE Masalah (
+    IssueID INT PRIMARY KEY AUTO_INCREMENT,
+    TaskID INT,
+    Deskripsi TEXT,
+    Status ENUM('Terbuka', 'Dalam Proses', 'Terselesaikan') DEFAULT 'Terbuka',
+    DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (TaskID) REFERENCES Tugas(TaskID)
+);
+
+-- Tabel untuk catatan
+CREATE TABLE Catatan (
+    NoteID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    TeksCatatan TEXT,
+    DibuatPada DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Pengguna(UserID)
+);
+
+
+///////////////////////////////////////////
+NOTE DARI KA JODA
+
+1. tamplate surat (perbaikan, instalasi, sutker)
+2. komputer datang (input data)
+3. login user (admin, teknisi, guest, helpdesk)
+4. menu service = instalasi, perbaikan, kerusakan, Software, Hardware, jaringan, upgrade, kategori
+5. didalam menu (view, timestamp, status, teknisian, tanggal ambil)
+6.  -Teknisian = memilih komputer yang dikerjakan sesuai(no cabang)
+    - update status(timestamp) service, on progress, done
+    - perlu perbaikan (y) - butuh service pro kembalikan (x)
+    - ceklist
+    - selesai(timestamp, berita acara = hari tanggal, nama teknisi, pihak ke 2)
+    - tanggal ambil
+
+/////////////////////////////////////////
+ALUR MIKIR!!
+
+1. tabel 
+2. ERD
+3. migrations
+4. model & controller
+
+
+///////////////////
+
+BAGUSTY VIRGONY
+095 022 955
