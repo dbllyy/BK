@@ -86,7 +86,7 @@ CREATE TABLE Notes (
 
 ///////////////////////////////////////
 
--- Tabel untuk pengguna
+-- Tabel untuk pengguna (user)
 CREATE TABLE Pengguna (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
     NamaPengguna VARCHAR(50) NOT NULL,
@@ -195,6 +195,11 @@ ALUR MIKIR!!
 2. ERD
 3. migrations
 4. model & controller
+
+
+////////////////////////////////////////
+
+komputer (no, id cabang, merek, masalah, )
 
 
 ///////////////////

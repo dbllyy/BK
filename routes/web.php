@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Controllers\KomputerController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BeritaController;
+
+
 
 Route::get('/', function () {
-    return view('index');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -24,5 +31,19 @@ Route::get('login', function () {
 
 // Handle the login request
 Route::post('login', [LoginController::class, 'login']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+////////////////
+
+Route::resource('komputer', KomputerController::class);
+
+
+//////////////
+
+Route::resource('services', ServiceController::class);
+
+//////////////
+Route::resource('beritaacara', ServiceController::class);
+
 
 require __DIR__.'/auth.php';
