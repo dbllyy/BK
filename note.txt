@@ -87,7 +87,7 @@ CREATE TABLE Notes (
 ///////////////////////////////////////
 
 -- Tabel untuk pengguna (user)
-CREATE TABLE Pengguna (
+CREATE TABLE user (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
     NamaPengguna VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE Tugas (
 CREATE TABLE Instalasi (
     InstallationID INT PRIMARY KEY AUTO_INCREMENT,
     NamaSoftware VARCHAR(100) NOT NULL,
-    Versi VARCHAR(20),
+    Versi VARCHAR(20), 
     TanggalInstalasi DATETIME DEFAULT CURRENT_TIMESTAMP,
     UserID INT,
     FOREIGN KEY (UserID) REFERENCES Pengguna(UserID)
@@ -184,10 +184,11 @@ ALUR MIKIR!!
 
 
 ////////////////////////////////////////
-
-1. komputer = no, id cabang, merek, kondisi(baru, second), timestamps
-2. service = no, id.cabang, merek, tipe service (hardare/software/jaringan), status)
-3. berita acara (no, id cabang, )
+1. user = (role admin & staff)
+2. cabang = (id.cabang PRIMARY, nama cabang)
+3. komputer = id.komputer PRIMARY, id.cabang, user.id, merek, kondisi(baru, second), keterangan, tipe service (hardare/software/jaringan), timestamps diterima
+4. service = id.service PRIMARY, id.komputer, id.cabang, user.id, merek, tipe service (hardare/software/jaringan), status, timestamp dikerjakan
+5. berita acara = (id cabang, id.service, user.id, id.komputer, tipe service, keterangan, status dikembalikan/selesai, timestamp bisa diambil)
 
 
 ///////////////////////////////////////////

@@ -1,0 +1,116 @@
++-------------+        +----------+
+|   Cabang    |        |   User   |
+|-------------|        |----------|
+| id_cabang   |<-----N | id       |
+| nama_cabang |        | role     |
++-------------+        +----------+
+       |                  |     |
+       |                  |     |
+      1|                 |1    |
+       |                  |     |
++-----------------+       |     |       +--------------+
+|     Komputer    |       |     |       |   Berita Acara |
+|-----------------|       |     |       |-----------------|
+| id_komputer     |<-----N|     |<-----N| id_cabang      |
+| id_cabang       |       |     |       | id_service     |
+| user_id         |       |     |       | user_id        |
+| merek           |       |     |       | id_komputer    |
+| kondisi         |       |     |       | tipe_service    |
+| keterangan      |       |     |       | keterangan      |
+| tipe_service    |       |     |       | status          |
++-----------------+       |     |       | timestamp_bisa_diambil |
+                         1|     |       +--------------+
+                          |     |
+                     +-----------------+
+                     |     Service     |
+                     |-----------------|
+                     | id_service      |
+                     | id_komputer     |
+                     | id_cabang       |
+                     | user_id         |
+                     | merek           |
+                     | tipe_service    |
+                     | status          |
+                     +-----------------+
+
+////////////////////////////////////////
+
+Entitas dan Atribut
+
+    Entitas: User //////
+        Atribut:
+            id (Primary Key)
+            role (ENUM: admin, staff)
+        Relasi:
+            Memiliki banyak Komputer
+            Memiliki banyak Service
+            Memiliki banyak Berita Acara
+
+    Entitas: Cabang ////////
+        Atribut:
+            id_cabang (Primary Key)
+            nama_cabang
+        Relasi:
+            Memiliki banyak Komputer
+            Memiliki banyak Service
+            Memiliki banyak Berita Acara
+
+    Entitas: Komputer /////
+        Atribut:
+            id_komputer (Primary Key)
+            id_cabang (Foreign Key)
+            user_id (Foreign Key)
+            merek
+            kondisi (ENUM: baru, second)
+            keterangan
+            tipe_service (ENUM: hardware, software, jaringan)
+            timestamps (Diterima)
+        Relasi:
+            Memiliki satu Cabang
+            Memiliki satu User
+            Memiliki banyak Service
+            Memiliki banyak Berita Acara
+
+    Entitas: Service ///////
+        Atribut:
+            id_service (Primary Key)
+            id_komputer (Foreign Key)
+            id_cabang (Foreign Key)
+            user_id (Foreign Key)
+            merek (opsional)
+            tipe_service (ENUM: hardware, software, jaringan)
+            status (ENUM: pending, in_progress, completed)
+            timestamp (Dikerjakan)
+        Relasi:
+            Memiliki satu Komputer
+            Memiliki satu Cabang
+            Memiliki satu User
+            Memiliki satu Berita Acara
+
+    Entitas: Berita Acara ///////
+        Atribut:
+            id_cabang (Foreign Key)
+            id_service (Foreign Key)
+            user_id (Foreign Key)
+            id_komputer (Foreign Key)
+            tipe_service (ENUM: hardware, software, jaringan)
+            keterangan
+            status (ENUM: dikembalikan, selesai)
+            timestamp_bisa_diambil
+        Relasi:
+            Memiliki satu Cabang
+            Memiliki satu Service
+            Memiliki satu User
+            Memiliki satu Komputer
+
+Relasi Antara Entitas
+
+    Cabang (1) <--- (N) Komputer
+    Cabang (1) <--- (N) Service
+    Cabang (1) <--- (N) Berita Acara
+    User (1) <--- (N) Komputer
+    User (1) <--- (N) Service
+    User (1) <--- (N) Berita Acara
+    Komputer (1) <--- (N) Service
+    Komputer (1) <--- (N) Berita Acara
+    Service (1) <--- (1) Berita Acara

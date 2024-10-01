@@ -1,0 +1,51 @@
+/* Table Styles */
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure the rounded corners are applied */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #d1d1d1; /* Light grey background on hover */
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ced4da; /* Slightly darker border color */
+    background-color: #d3d3d3; /* Darker grey for table cells */
+}
+
+.table th {
+    background-color: #b0b0b0; /* Darker grey for header */
+    color: #212529; /* Darker text color for contrast */
+}
+
+/* Rounded corners for table cells */
+.table th:first-child {
+    border-top-left-radius: 8px; /* Round top-left corner */
+}
+
+.table th:last-child {
+    border-top-right-radius: 8px; /* Round top-right corner */
+}
+
+.table td:first-child {
+    border-bottom-left-radius: 8px; /* Round bottom-left corner */
+}
+
+.table td:last-child {
+    border-bottom-right-radius: 8px; /* Round bottom-right corner */
+}
+
+/* Responsive Table */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll for small screens */
+}
+.btn-custom {
+    padding: 5px 10px; /* Adjust top/bottom and left/right padding */
+    font-size: 14px;   /* Adjust font size */
+}
