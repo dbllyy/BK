@@ -109,17 +109,19 @@
         </ul>
       </nav>
       <!-- partial -->
-  <div class="main-panel">
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-12 grid-margin">
-                <div class="row">
-                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                        <h3 class="font-weight-bold">Data Komputer</h3>
+
+      <!-- table -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                            <h3 class="font-weight-bold">Data Komputer</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <button type="button" class="btn btn-primary btn-custom mb-1" data-toggle="modal" data-target="#tambahBankSoalModal">
             <i class="fa fa-plus"></i> Tambah Data Komputer
@@ -137,7 +139,7 @@
                         <th scope="col">Cabang</th>
                         <th scope="col">Komputer</th>
                         <th scope="col">Staff</th>
-                        <th scope="col">Merek</th>
+                        <th scope="col">Jumlah</th>
                         <th scope="col">Kondisi</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Service</th>
@@ -146,12 +148,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Add your table data here -->
+                   <tr>
+                <td>1</td>
+                <td>Cabang A</td>
+                <td>PC-01</td>
+                <td>John Doe</td>
+                <td>1</td>
+                <td>Baru</td>
+                <td>Masih berfungsi dengan baik</td>
+                <td>Install OS</td>
+                <td>01-01-2024</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Edit</button>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Cabang B</td>
+                <td>PC-02</td>
+                <td>Jane Smith</td>
+                <td>2</td>
+                <td>Rusak</td>
+                <td>Butuh penggantian komponen</td>
+                <td>Service Khusus</td>
+                <td>02-01-2024</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Edit</button>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    
+      <!-- end table -->
     <!-- Footer Section -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">

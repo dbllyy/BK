@@ -18,9 +18,13 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="/css/tablescolor.css"> 
+  <link href="/datatables.min.css" rel="stylesheet">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/logokecil.png" />
 </head>
+
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -105,84 +109,86 @@
         </ul>
       </nav>
       <!-- partial -->
+
+      <!-- table -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Data Proses Services</h3>
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                            <h3 class="font-weight-bold">Data Service</h3>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin transparent">
-              <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-tale">
-                    <div class="card-body">
-                      <p class="mb-4">Komputer Masuk</p>
-                      <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Komputer Dalam Perbaikan</p>
-                      <p class="fs-30 mb-2">61344</p>
-                      <p>22.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body">
-                      <p class="mb-4"> Komputer Selesai</p>
-                      <p class="fs-30 mb-2">34040</p>
-                      <p>2.00% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card card-light-danger">
-                    <div class="card-body">
-                      <p class="mb-4">Komputer Di Kembalikan</p>
-                      <p class="fs-30 mb-2">47033</p>
-                      <p>0.22% (30 days)</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-         
-                
-              </div>
-            </div>
+
+        <button type="button" class="btn btn-primary btn-custom mb-1" data-toggle="modal" data-target="#tambahBankSoalModal">
+            <i class="fa fa-plus"></i> Tambah Data Service
+        </button>
+        <button class="btn btn-outline-primary btn-custom mb-1" type="button" onClick="window.location.reload()">
+            <i class="fa fa-refresh"></i> Refresh
+        </button>
+
+
+        <div class="table-responsive">
+    <table class="table table-hover table-bordered" id="sampleTable">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Staff</th>
+                <th scope="col">Komputer</th>
+                <th scope="col">Cabang</th>
+                <th scope="col">Merek</th>
+                <th scope="col">Service</th>
+                <th scope="col">Status</th>
+                <th scope="col">Di Kerjakan</th>
+                <th style="width: 123px;" scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>PC-01</td>
+                <td>Cabang A</td>
+                <td>HP</td>
+                <td>Service Rutin</td>
+                <td>Selesai</td>
+                <td>01-01-2024</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Edit</button>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>PC-02</td>
+                <td>Cabang B</td>
+                <td>Dell</td>
+                <td>Service Khusus</td>
+                <td>Dalam Proses</td>
+                <td>02-01-2024</td>
+                <td>
+                  <button class="btn btn-sm btn-primary">Edit</button>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+                </tbody>
+            </table>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-          </div>
-        </footer> 
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>   
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+    </div>
+      <!-- end table -->
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                Copyright © 2024. Divisi TI 
+            </span>
+        </div>
+    </footer>
+</div>
 
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
@@ -206,6 +212,7 @@
   <script src="js/Chart.roundedBarCharts.js"></script>
   <script src="js/logout.js"></script>
   <script src="js/htaccsess.js"></script>
+  <script src="js/datatables.min.js"></script>
   <!-- End custom js for this page-->
 </body>
 
