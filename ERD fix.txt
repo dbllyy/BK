@@ -1,0 +1,89 @@
+. Entitas dan Atribut
+
+1. Komputer
+
+    ID (Primary Key)
+    Cabang_ID (Foreign Key)
+    Jumlah
+    Kondisi (enum: baru, second)
+    Keterangan (text)
+
+2. Service
+
+    ID (Primary Key)
+    Staff_ID (Foreign Key)
+    Komputer_ID (Foreign Key)
+    Cabang_ID (Foreign Key)
+    Merek
+    Service (enum: install OS, service khusus, jaringan, full service)
+    Status
+    Di Kerjakan (boolean)
+
+3. Berita Acara
+
+    ID (Primary Key)
+    Staff_ID (Foreign Key)
+    Komputer_ID (Foreign Key)
+    Cabang_ID (Foreign Key)
+    Merek
+    Service
+    Status
+    Keterangan (enum: bisa diambil, dikembalikan; text juga bisa)
+    Tgl_Di_Ambil (date)
+
+4. Cabang
+
+    No_Cabang (Primary Key)
+    Nama_Cabang
+
+5. User (Staff)
+
+    NIP (Primary Key)
+    Nama_Staff
+    Role (admin/staff)
+    password
+
+2. Relasi
+
+    Komputer memiliki banyak Service
+    Komputer memiliki banyak Berita Acara
+    Service memiliki satu Komputer dan satu User (Staff)
+    Berita Acara memiliki satu Komputer dan satu User (Staff)
+    Cabang memiliki banyak Komputer dan Service
+    User (Staff) memiliki banyak Service dan Berita Acara
+
+
++--------------+        +-----------+       +--------------+
+|   Cabang     |<------ |  Komputer |<----->|   Service    |
+|--------------|        |-----------|       |--------------|
+| No_Cabang PK |        | ID PK     |       | ID PK        |
+| Nama_Cabang   |        | Cabang_ID FK |    | Staff_ID FK  |
++--------------+        | Jumlah    |       | Komputer_ID FK |
+                       | Kondisi   |       | Merek        |
+                       | Keterangan |       | Service      |
+                       +-----------+       | Status       |
+                                            | Di_Kerjakan  |
+                                            +--------------+
+
+                +-------------------+
+                |    Berita Acara   |
+                |-------------------|
+                | ID PK             |
+                | Staff_ID FK       |
+                | Komputer_ID FK    |
+                | Cabang_ID FK      |
+                | Merek             |
+                | Service           |
+                | Status            |
+                | Keterangan        |
+                | Tgl_Di_Ambil     |
+                +-------------------+
+                     
+                +--------------+
+                |     User     |
+                |--------------|
+                | NIP PK       |
+                | Nama_Staff   |
+                | Role         |
+                password
+                +--------------+

@@ -86,20 +86,32 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/komputer">
-              <i class="icon-layout menu-icon"></i>
+              <i class="ti-desktop menu-icon"></i>
               <span class="menu-title">Komputer</span>
             </a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="/services">
-              <i class="icon-columns menu-icon"></i>
+              <i class="ti-panel menu-icon"></i>
               <span class="menu-title">Service</span>
             </a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="/beritaacara">
-              <i class="icon-bar-graph menu-icon"></i>
+              <i class="ti-notepad menu-icon"></i>
               <span class="menu-title">Berita Acara</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/cabang">
+              <i class="ti-location-arrow menu-icon"></i>
+              <span class="menu-title">Cabang</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/user">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">User</span>
             </a>
           </li>
         </ul>
@@ -125,7 +137,6 @@
                     <div class="card-body">
                       <p class="mb-4">Komputer Masuk</p>
                       <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
                     </div>
                   </div>
                 </div>
@@ -134,7 +145,6 @@
                     <div class="card-body">
                       <p class="mb-4">Komputer Dalam Perbaikan</p>
                       <p class="fs-30 mb-2">61344</p>
-                      <p>22.00% (30 days)</p>
                     </div>
                   </div>
                 </div>
@@ -145,7 +155,6 @@
                     <div class="card-body">
                       <p class="mb-4"> Komputer Selesai</p>
                       <p class="fs-30 mb-2">34040</p>
-                      <p>2.00% (30 days)</p>
                     </div>
                   </div>
                 </div>
@@ -154,9 +163,9 @@
                     <div class="card-body">
                       <p class="mb-4">Komputer Di Kembalikan</p>
                       <p class="fs-30 mb-2">47033</p>
-                      <p>0.22% (30 days)</p>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

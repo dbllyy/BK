@@ -25,5 +25,12 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index')->with('success', 'User created successfully!');
-    } //
+    } 
+
+    public function index()
+    {
+        // Fetch data from the database if needed
+        return view('user.index'); // Change to your actual view file
+    }
+
 }

@@ -80,7 +80,7 @@
      
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="/dashboard">
@@ -90,20 +90,32 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/komputer">
-              <i class="icon-layout menu-icon"></i>
+              <i class="ti-desktop menu-icon"></i>
               <span class="menu-title">Komputer</span>
             </a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="/services">
-              <i class="icon-columns menu-icon"></i>
+              <i class="ti-panel menu-icon"></i>
               <span class="menu-title">Service</span>
             </a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="/beritaacara">
-              <i class="icon-bar-graph menu-icon"></i>
+              <i class="ti-notepad menu-icon"></i>
               <span class="menu-title">Berita Acara</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/cabang">
+              <i class="ti-location-arrow menu-icon"></i>
+              <span class="menu-title">Cabang</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/user">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">User</span>
             </a>
           </li>
         </ul>
@@ -138,7 +150,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Cabang</th>
                         <th scope="col">Komputer</th>
-                        <th scope="col">Staff</th>
+                        {{-- <th scope="col">Staff</th> --}}
                         <th scope="col">Jumlah</th>
                         <th scope="col">Kondisi</th>
                         <th scope="col">Keterangan</th>
@@ -152,7 +164,7 @@
                 <td>1</td>
                 <td>Cabang A</td>
                 <td>PC-01</td>
-                <td>John Doe</td>
+                {{-- <td>John Doe</td> --}}
                 <td>1</td>
                 <td>Baru</td>
                 <td>Masih berfungsi dengan baik</td>
@@ -167,7 +179,7 @@
                 <td>2</td>
                 <td>Cabang B</td>
                 <td>PC-02</td>
-                <td>Jane Smith</td>
+                {{-- <td>Jane Smith</td> --}}
                 <td>2</td>
                 <td>Rusak</td>
                 <td>Butuh penggantian komponen</td>

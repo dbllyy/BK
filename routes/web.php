@@ -4,10 +4,14 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use Illuminate\Auth\Middleware\Authenticate;
+// use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CabangController;
+
+
 
 
 
@@ -35,6 +39,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 
 ////////////////
 
+Route::resource('user', UserController::class);
+
+////////////////
+
 Route::resource('komputer', KomputerController::class);
 
 
@@ -43,7 +51,12 @@ Route::resource('komputer', KomputerController::class);
 Route::resource('services', ServiceController::class);
 
 //////////////
-Route::resource('beritaacara', ServiceController::class);
+
+Route::resource('beritaacara', BeritaController::class);
+
+//////////////
+
+Route::resource('cabang', CabangController::class);
 
 
 require __DIR__.'/auth.php';
