@@ -10,13 +10,15 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\AdminController;
+
 
 
 
 
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('admin.index');
 });
 
 Route::get('/dashboard', function () {
@@ -57,6 +59,23 @@ Route::resource('beritaacara', BeritaController::class);
 //////////////
 
 Route::resource('cabang', CabangController::class);
+
+/////////////////////
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+});
+
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// // role admin
+// Route::get('/admin', [AdminController::class, 'index'])->name('pengguna.index');
 
 
 require __DIR__.'/auth.php';

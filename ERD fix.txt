@@ -41,7 +41,7 @@
     NIP (Primary Key)
     Nama_Staff
     Role (admin/staff)
-    password
+    password (hash)
 
 2. Relasi
 

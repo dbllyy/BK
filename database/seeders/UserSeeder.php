@@ -10,13 +10,21 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
+        // Buat pengguna dengan role admin
         User::create([
-            'name' => 'admin',
-            'email' => 'admin@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('admin125'), // Password yang di-hash
-            'role' => 'admin', // Menggunakan 'role' alih-alih 'userType'
-            'remember_token' => null,
+            'NIP' => '123456789', // Ganti dengan NIP yang valid
+            'Nama_Staff' => 'admin',
+            'Role' => 'admin',
+            'password' => Hash::make('admin125'), // Ganti dengan password yang diinginkan
+        ]);
+
+        // Anda dapat menambahkan pengguna lain di sini
+        User::create([
+            'NIP' => '987654321', // Ganti dengan NIP yang valid
+            'Nama_Staff' => 'staff',
+            'Role' => 'staff',
+            'password' => Hash::make('staff123'), // Ganti dengan password yang diinginkan
         ]);
     }
 }
+

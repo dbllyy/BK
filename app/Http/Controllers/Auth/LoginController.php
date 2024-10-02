@@ -8,22 +8,39 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function login(Request $request)
     {
-        // Validate login credentials
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+        // Validasi input
+        $credentials = $request->validate([
+            'Nama_Staff' => ['required', 'string'],
+            'password' => ['required', 'string'],
         ]);
 
-        // Attempt to log the user in
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Authentication passed
-            return redirect()->intended('dashboard')->with('success', 'Logged in successfully!');
+        // Menggunakan Nama_Staff dan password untuk autentikasi
+        if (Auth::attempt(['Nama_Staff' => $credentials['Nama_Staff'], 'password' => $credentials['password']])) {
+            // Autentikasi berhasil, redirect ke halaman home
+            return redirect()->intended('home');
         }
 
+        // Jika gagal, kembalikan ke halaman login dengan error
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'Nama_Staff' => 'Nama Staff atau password salah.',
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+    
 }

@@ -2,66 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cabang;
 use Illuminate\Http\Request;
 
 class CabangController extends Controller
 {
+    // Menampilkan semua cabang
     public function index()
     {
-        // Fetch data from the database if needed
-        return view('cabang.index'); // Change to your actual view file
-    }
+        $cabang = Cabang::all();
+        return response()->json($cabang);
+/*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Display the form for creating a new cabang.
+     *
+     * @return \Illuminate\Http\Response
+     */
+/******  59a0aed9-6f17-48ca-a736-a6aaaca09718  *******/    }
 
-    public function create()
-    {
-        return view('cabang.create');
-    }
-
+    // Menyimpan cabang baru
     public function store(Request $request)
     {
-        // Validate and store data
         $request->validate([
-            'name' => 'required|string|max:255',
-            // Add more validation rules as needed
+            'Nama_Cabang' => 'required|string|max:255',
         ]);
 
-        // Save the cabang data to the database
-        // Example: cabang::create($request->all());
-
-        return redirect()->route('cabang.index')->with('success', 'cabang created successfully!');
-    }
-
-    // public function show($id)
-    // {
-    //     // Fetch the cabang by ID
-    //     return view('cabang.show', compact('id')); // Adjust as needed
-    // }
-
-    public function edit($id)
-    {
-        // Fetch the cabang for editing
-        return view('cabang.edit', compact('id')); // Adjust as needed
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Validate and update the cabang data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // Add more validation rules as needed
+        $cabang = Cabang::create([
+            'Nama_Cabang' => $request->Nama_Cabang,
         ]);
 
-        // Update the cabang data in the database
-        // Example: cabang::find($id)->update($request->all());
-
-        return redirect()->route('cabang.index')->with('success', 'cabang updated successfully!');
+        return response()->json($cabang, 201);
     }
 
-    public function destroy($id)
+    // Menampilkan cabang berdasarkan No_Cabang
+    public function show($No_Cabang)
     {
-        // Delete the cabang
-        // Example: cabang::destroy($id);
+        $cabang = Cabang::findOrFail($No_Cabang);
+        return response()->json($cabang);
+    }
 
-        return redirect()->route('cabang.index')->with('success', 'cabang deleted successfully!');
+    // Mengupdate data cabang
+    public function update(Request $request, $No_Cabang)
+    {
+        $request->validate([
+            'Nama_Cabang' => 'string|max:255',
+        ]);
+
+        $cabang = Cabang::findOrFail($No_Cabang);
+        $cabang->update($request->all());
+
+        return response()->json($cabang);
+    }
+
+    // Menghapus cabang
+    public function destroy($No_Cabang)
+    {
+        $cabang = Cabang::findOrFail($No_Cabang);
+        $cabang->delete();
+
+        return response()->json(null, 204);
     }
 }
