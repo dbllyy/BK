@@ -2,64 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cabang;
 use Illuminate\Http\Request;
 
 class CabangController extends Controller
 {
-    // Menampilkan semua cabang
     public function index()
     {
-        $cabang = Cabang::all();
-        return response()->json($cabang);
-/*************  ✨ Codeium Command ⭐  *************/
-    /**
-     * Display the form for creating a new cabang.
-     *
-     * @return \Illuminate\Http\Response
-     */
-/******  59a0aed9-6f17-48ca-a736-a6aaaca09718  *******/    }
+        // Fetch data from the database if needed
+        return view('cabang.index'); // Change to your actual view file
+    }
 
-    // Menyimpan cabang baru
+    public function create()
+    {
+        return view('cabang.create');
+    }
+
     public function store(Request $request)
     {
+        // Validate and store data
         $request->validate([
-            'Nama_Cabang' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            // Add more validation rules as needed
         ]);
 
-        $cabang = Cabang::create([
-            'Nama_Cabang' => $request->Nama_Cabang,
-        ]);
+        // Save the cabang data to the database
+        // Example: cabang::create($request->all());
 
-        return response()->json($cabang, 201);
+        return redirect()->route('cabang.index')->with('success', 'cabang created successfully!');
     }
 
-    // Menampilkan cabang berdasarkan No_Cabang
-    public function show($No_Cabang)
+    // public function show($id)
+    // {
+    //     // Fetch the cabang by ID
+    //     return view('cabang.show', compact('id')); // Adjust as needed
+    // }
+
+    public function edit($id)
     {
-        $cabang = Cabang::findOrFail($No_Cabang);
-        return response()->json($cabang);
+        // Fetch the cabang for editing
+        return view('cabang.edit', compact('id')); // Adjust as needed
     }
 
-    // Mengupdate data cabang
-    public function update(Request $request, $No_Cabang)
+    public function update(Request $request, $id)
     {
+        // Validate and update the cabang data
         $request->validate([
-            'Nama_Cabang' => 'string|max:255',
+            'name' => 'required|string|max:255',
+            // Add more validation rules as needed
         ]);
 
-        $cabang = Cabang::findOrFail($No_Cabang);
-        $cabang->update($request->all());
+        // Update the cabang data in the database
+        // Example: cabang::find($id)->update($request->all());
 
-        return response()->json($cabang);
+        return redirect()->route('cabang.index')->with('success', 'cabang updated successfully!');
     }
 
-    // Menghapus cabang
-    public function destroy($No_Cabang)
+    public function destroy($id)
     {
-        $cabang = Cabang::findOrFail($No_Cabang);
-        $cabang->delete();
+        // Delete the cabang
+        // Example: cabang::destroy($id);
 
-        return response()->json(null, 204);
+        return redirect()->route('cabang.index')->with('success', 'cabang deleted successfully!');
     }
 }
