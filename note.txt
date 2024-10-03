@@ -210,3 +210,11 @@ NOTE DARI KA JODA
 
 BAGUSTY VIRGONY
 095 022 955
+
+
+//////////////////
+SISA perbaikan
+1. LOGIN Username
+2. TEST Database
+3. CRUD
+4. ROUTE VIEW
