@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2024 at 11:04 AM
+-- Generation Time: Oct 03, 2024 at 11:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `berita_acaras`
+--
+
+CREATE TABLE `berita_acaras` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `komputer_id` bigint(20) UNSIGNED NOT NULL,
+  `cabang_id` bigint(20) UNSIGNED NOT NULL,
+  `NIP` varchar(255) NOT NULL,
+  `merek` varchar(255) NOT NULL,
+  `service` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `keterangan` enum('bisa diambil','dikembalikan') DEFAULT NULL,
+  `tgl_di_ambil` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -147,7 +167,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2024_10_02_071635_create_cabang_table', 2),
 (5, '2024_10_03_034822_create_komputers_table', 3),
-(7, '2024_10_03_041015_create_services_table', 4);
+(7, '2024_10_03_041015_create_services_table', 4),
+(8, '2024_10_03_091138_create__berita_acara_table', 5);
 
 -- --------------------------------------------------------
 
@@ -189,7 +210,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 ('cg09o2shD2gocWsNi9D8WXu0bAwNX38AL9G8pPzO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ2pqWnF1VzZWVEtOVklQRnZvUDlxOEtFVzdzYUZLbVpPQlUxeUZKNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rb21wdXRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyIjt9fQ==', 1727853318),
 ('MCws0UXXjqCzEcRgIBB2XDUVkBG35WNwsNylUEmp', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRXBzdm5VQk80MkYydHBKZTJJMndkNWFPRW5RTXlDUE91aWxOWXRrWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zZXJ2aWNlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727928303),
 ('1Prugi4tU5qZKtJn52xHozJ1Zdd6bbkFWIG8IKw5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkJTMlpPT1RpSHB4RU9uZkdIQlZ0WkJGR09LcmI5UGhnQTdEZ2FXaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727943329),
-('OzUyKjA1aHTthyHAOo4H6zXsMIOej9yqChTwOXSU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOEJWMU4zeGoxZGMzbU1zdUJUOG82WDQ5UVdaQk5LdHdzWDZ5VTVHQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zZXJ2aWNlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727943331);
+('OzUyKjA1aHTthyHAOo4H6zXsMIOej9yqChTwOXSU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOEJWMU4zeGoxZGMzbU1zdUJUOG82WDQ5UVdaQk5LdHdzWDZ5VTVHQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1727947733);
 
 -- --------------------------------------------------------
 
@@ -217,6 +238,15 @@ INSERT INTO `users` (`NIP`, `Nama_Staff`, `Role`, `password`, `created_at`, `upd
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `berita_acaras`
+--
+ALTER TABLE `berita_acaras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `berita_acaras_nip_foreign` (`NIP`),
+  ADD KEY `berita_acaras_komputer_id_foreign` (`komputer_id`),
+  ADD KEY `berita_acaras_cabang_id_foreign` (`cabang_id`);
 
 --
 -- Indexes for table `cabangs`
@@ -289,6 +319,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `berita_acaras`
+--
+ALTER TABLE `berita_acaras`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cabangs`
 --
 ALTER TABLE `cabangs`
@@ -316,7 +352,7 @@ ALTER TABLE `komputers`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -327,6 +363,14 @@ ALTER TABLE `services`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `berita_acaras`
+--
+ALTER TABLE `berita_acaras`
+  ADD CONSTRAINT `berita_acaras_cabang_id_foreign` FOREIGN KEY (`cabang_id`) REFERENCES `cabangs` (`No_Cabang`) ON DELETE CASCADE,
+  ADD CONSTRAINT `berita_acaras_komputer_id_foreign` FOREIGN KEY (`komputer_id`) REFERENCES `komputers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `berita_acaras_nip_foreign` FOREIGN KEY (`NIP`) REFERENCES `users` (`NIP`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `komputers`

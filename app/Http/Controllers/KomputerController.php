@@ -11,7 +11,13 @@ class KomputerController extends Controller
     public function index()
     {
         $komputers = Komputer::all();
-        return response()->json($komputers);
+        return view('komputer.index', compact('komputers')); // Return the view with the list of computers
+    }
+
+    // Menampilkan form untuk menambahkan komputer baru
+    public function create()
+    {
+        return view('komputers.create'); // Return the view for creating a new computer
     }
 
     // Menyimpan data komputer baru
@@ -25,14 +31,21 @@ class KomputerController extends Controller
         ]);
 
         $komputer = Komputer::create($validated);
-        return response()->json($komputer, 201);
+        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil ditambahkan.'); // Redirect to index with success message
     }
 
     // Menampilkan data komputer berdasarkan ID
     public function show($id)
     {
         $komputer = Komputer::findOrFail($id);
-        return response()->json($komputer);
+        return view('komputers.show', compact('komputer')); // Return the view with the computer details
+    }
+
+    // Menampilkan form untuk mengedit data komputer
+    public function edit($id)
+    {
+        $komputer = Komputer::findOrFail($id);
+        return view('komputers.edit', compact('komputer')); // Return the view for editing the computer
     }
 
     // Mengupdate data komputer
@@ -47,7 +60,7 @@ class KomputerController extends Controller
 
         $komputer = Komputer::findOrFail($id);
         $komputer->update($validated);
-        return response()->json($komputer);
+        return redirect()->route('komputer.index')->with('success', 'Komputer berhasil diperbarui.'); // Redirect to index with success message
     }
 
     // Menghapus data komputer
@@ -55,6 +68,6 @@ class KomputerController extends Controller
     {
         $komputer = Komputer::findOrFail($id);
         $komputer->delete();
-        return response()->json(null, 204);
+        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil dihapus.'); // Redirect to index with success message
     }
 }
