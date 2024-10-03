@@ -2,66 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komputer;
 use Illuminate\Http\Request;
 
 class KomputerController extends Controller
 {
+    // Menampilkan daftar komputer
     public function index()
     {
-        // Fetch data from the database if needed
-        return view('komputer.index'); // Change to your actual view file
+        $komputers = Komputer::all();
+        return response()->json($komputers);
     }
 
-    public function create()
-    {
-        return view('komputer.create');
-    }
-
+    // Menyimpan data komputer baru
     public function store(Request $request)
     {
-        // Validate and store data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // Add more validation rules as needed
+        $validated = $request->validate([
+            'cabang_id' => 'required|exists:cabangs,id',
+            'jumlah' => 'required|integer',
+            'kondisi' => 'required|in:baru,second',
+            'keterangan' => 'nullable|string',
         ]);
 
-        // Save the komputer data to the database
-        // Example: Komputer::create($request->all());
-
-        return redirect()->route('komputer.index')->with('success', 'Komputer created successfully!');
+        $komputer = Komputer::create($validated);
+        return response()->json($komputer, 201);
     }
 
-    // public function show($id)
-    // {
-    //     // Fetch the komputer by ID
-    //     return view('komputer.show', compact('id')); // Adjust as needed
-    // }
-
-    public function edit($id)
+    // Menampilkan data komputer berdasarkan ID
+    public function show($id)
     {
-        // Fetch the komputer for editing
-        return view('komputer.edit', compact('id')); // Adjust as needed
+        $komputer = Komputer::findOrFail($id);
+        return response()->json($komputer);
     }
 
+    // Mengupdate data komputer
     public function update(Request $request, $id)
     {
-        // Validate and update the komputer data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // Add more validation rules as needed
+        $validated = $request->validate([
+            'cabang_id' => 'required|exists:cabangs,id',
+            'jumlah' => 'required|integer',
+            'kondisi' => 'required|in:baru,second',
+            'keterangan' => 'nullable|string',
         ]);
 
-        // Update the komputer data in the database
-        // Example: Komputer::find($id)->update($request->all());
-
-        return redirect()->route('komputer.index')->with('success', 'Komputer updated successfully!');
+        $komputer = Komputer::findOrFail($id);
+        $komputer->update($validated);
+        return response()->json($komputer);
     }
 
+    // Menghapus data komputer
     public function destroy($id)
     {
-        // Delete the komputer
-        // Example: Komputer::destroy($id);
-
-        return redirect()->route('komputer.index')->with('success', 'Komputer deleted successfully!');
+        $komputer = Komputer::findOrFail($id);
+        $komputer->delete();
+        return response()->json(null, 204);
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 09:50 AM
+-- Generation Time: Oct 03, 2024 at 11:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,14 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel`
 --
-`
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cabang`
+-- Table structure for table `cabangs`
 --
 
-CREATE TABLE `cabang` (
+CREATE TABLE `cabangs` (
   `No_Cabang` bigint(20) UNSIGNED NOT NULL,
   `Nama_Cabang` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -112,6 +112,22 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `komputers`
+--
+
+CREATE TABLE `komputers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cabang_id` bigint(20) UNSIGNED NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `kondisi` enum('baru','second') NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -129,7 +145,26 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_10_02_071635_create_cabang_table', 2);
+(4, '2024_10_02_071635_create_cabang_table', 2),
+(5, '2024_10_03_034822_create_komputers_table', 3),
+(7, '2024_10_03_041015_create_services_table', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `NIP` varchar(255) NOT NULL,
+  `Komputer_ID` bigint(20) UNSIGNED NOT NULL,
+  `Cabang_ID` bigint(20) UNSIGNED NOT NULL,
+  `Merek` varchar(255) NOT NULL,
+  `Service` enum('install OS','service khusus','jaringan','full service') NOT NULL,
+  `Status` varchar(255) NOT NULL,
+  `Di_Kerjakan` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -151,7 +186,10 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('cg09o2shD2gocWsNi9D8WXu0bAwNX38AL9G8pPzO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ2pqWnF1VzZWVEtOVklQRnZvUDlxOEtFVzdzYUZLbVpPQlUxeUZKNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rb21wdXRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyIjt9fQ==', 1727853318);
+('cg09o2shD2gocWsNi9D8WXu0bAwNX38AL9G8pPzO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ2pqWnF1VzZWVEtOVklQRnZvUDlxOEtFVzdzYUZLbVpPQlUxeUZKNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rb21wdXRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyIjt9fQ==', 1727853318),
+('MCws0UXXjqCzEcRgIBB2XDUVkBG35WNwsNylUEmp', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRXBzdm5VQk80MkYydHBKZTJJMndkNWFPRW5RTXlDUE91aWxOWXRrWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zZXJ2aWNlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727928303),
+('1Prugi4tU5qZKtJn52xHozJ1Zdd6bbkFWIG8IKw5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkJTMlpPT1RpSHB4RU9uZkdIQlZ0WkJGR09LcmI5UGhnQTdEZ2FXaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727943329),
+('OzUyKjA1aHTthyHAOo4H6zXsMIOej9yqChTwOXSU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOEJWMU4zeGoxZGMzbU1zdUJUOG82WDQ5UVdaQk5LdHdzWDZ5VTVHQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zZXJ2aWNlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727943331);
 
 -- --------------------------------------------------------
 
@@ -181,9 +219,9 @@ INSERT INTO `users` (`NIP`, `Nama_Staff`, `Role`, `password`, `created_at`, `upd
 --
 
 --
--- Indexes for table `cabang`
+-- Indexes for table `cabangs`
 --
-ALTER TABLE `cabang`
+ALTER TABLE `cabangs`
   ADD PRIMARY KEY (`No_Cabang`);
 
 --
@@ -219,10 +257,26 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `komputers`
+--
+ALTER TABLE `komputers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `komputers_cabang_id_foreign` (`cabang_id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `services_nip_foreign` (`NIP`),
+  ADD KEY `services_komputer_id_foreign` (`Komputer_ID`),
+  ADD KEY `services_cabang_id_foreign` (`Cabang_ID`);
 
 --
 -- Indexes for table `users`
@@ -235,9 +289,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `cabang`
+-- AUTO_INCREMENT for table `cabangs`
 --
-ALTER TABLE `cabang`
+ALTER TABLE `cabangs`
   MODIFY `No_Cabang` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -253,10 +307,40 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `komputers`
+--
+ALTER TABLE `komputers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `komputers`
+--
+ALTER TABLE `komputers`
+  ADD CONSTRAINT `komputers_cabang_id_foreign` FOREIGN KEY (`cabang_id`) REFERENCES `cabangs` (`No_Cabang`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_cabang_id_foreign` FOREIGN KEY (`Cabang_ID`) REFERENCES `cabangs` (`No_Cabang`) ON DELETE CASCADE,
+  ADD CONSTRAINT `services_komputer_id_foreign` FOREIGN KEY (`Komputer_ID`) REFERENCES `komputers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `services_nip_foreign` FOREIGN KEY (`NIP`) REFERENCES `users` (`NIP`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

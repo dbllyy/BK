@@ -17,7 +17,7 @@
     Merek
     Service (enum: install OS, service khusus, jaringan, full service)
     Status
-    Di Kerjakan (boolean)
+    Di Kerjakan (timestamps)
 
 3. Berita Acara
 
