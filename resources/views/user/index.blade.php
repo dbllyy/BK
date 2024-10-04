@@ -155,26 +155,24 @@
             </tr>
         </thead>
         <tbody>
+        @foreach ($users as $user)
             <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>112233</td>
-                <td>Admin</td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->nip }}</td>
+                <td>{{ $user->role }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <a href="{{ route('users.show', $user->id) }}">Lihat</a>
+                    <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Hapus</button>
+                    </form>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>555555</td>
-                <td>Staff</td>
-                <td>
-                  <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>

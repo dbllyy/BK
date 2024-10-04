@@ -159,34 +159,28 @@
             </tr>
         </thead>
         <tbody>
+        @foreach ($services as $service)
             <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>PC-01</td>
-                <td>Cabang A</td>
-                <td>HP</td>
-                <td>Service Rutin</td>
-                <td>Selesai</td>
-                <td>01-01-2024</td>
+                <td>{{ $service->id }}</td>
+                <td>{{ $service->staff }}</td>
+                <td>{{ $service->komputer }}</td>
+                <td>{{ $service->cabang }}</td>
+                <td>{{ $service->merek }}</td>
+                <td>{{ $service->service }}</td>
+                <td>{{ $service->status }}</td>
+                <td>{{ $service->di_kerjakan }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <a href="{{ route('services.show', $service->id) }}">Lihat</a>
+                    <a href="{{ route('services.edit', $service->id) }}">Edit</a>
+                    <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Hapus</button>
+                    </form>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>PC-02</td>
-                <td>Cabang B</td>
-                <td>Dell</td>
-                <td>Service Khusus</td>
-                <td>Dalam Proses</td>
-                <td>02-01-2024</td>
-                <td>
-                  <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>

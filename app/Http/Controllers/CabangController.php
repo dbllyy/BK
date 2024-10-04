@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cabang;
 use Illuminate\Http\Request;
 
 class CabangController extends Controller
 {
     public function index()
-    {
-        // Fetch data from the database if needed
-        return view('cabang.index'); // Change to your actual view file
-    }
+{
+    // Fetch services from the database
+    $cabangs = Cabang::all(); // Adjust this if you want specific conditions
+
+    // Pass the $services variable to the view
+    return view('cabang.index', compact('cabangs'));
+}
+
 
     public function create()
     {
@@ -31,11 +36,11 @@ class CabangController extends Controller
         return redirect()->route('cabang.index')->with('success', 'cabang created successfully!');
     }
 
-    // public function show($id)
-    // {
-    //     // Fetch the cabang by ID
-    //     return view('cabang.show', compact('id')); // Adjust as needed
-    // }
+    public function show($id)
+    {
+        $cabang = Cabang::findOrFail($id);
+        return view('cabangs.show', compact('cabang'));
+    }
 
     public function edit($id)
     {

@@ -154,24 +154,24 @@
             </tr>
         </thead>
         <tbody>
+                @foreach ($cabangs as $cabang)
             <tr>
-                <td>1</td>
-                <td>608</td>
-                <td>Kasongan</td>
+                <td>{{ $cabang->id }}</td>
+                <td>{{ $cabang->cabang_id }}</td>
+                <td>{{ $cabang->cabang }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <a href="{{ route('cabangs.show', $cabang->id) }}">Lihat</a>
+                    <a href="{{ route('cabangs.edit', $cabang->id) }}">Edit</a>
+                    <form action="{{ route('cabangs.destroy', $cabang->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Hapus</button>
+                    </form>
                 </td>
-            </tr>
             <tr>
-                <td>1</td>
-                <td>268</td>
-                <td>Sampit</td>
-                <td>
-                  <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
+
+                @endforeach
+
                 </tbody>
             </table>
         </div>

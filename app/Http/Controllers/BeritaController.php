@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeritaAcara;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
     public function index()
-    {
-        // Fetch data from the database if needed
-        return view('beritaacara.index'); // Change to your actual view file
-    }
+{
+    // Fetch services from the database
+    $beritaacaras = BeritaAcara::all(); // Adjust this if you want specific conditions
 
+    // Pass the $services variable to the view
+    return view('beritaacara.index', compact('beritaacaras'));
+}
     public function create()
     {
         return view('beritaacara.create');

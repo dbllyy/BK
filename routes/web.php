@@ -60,6 +60,7 @@ Route::resource('beritaacara', BeritaController::class);
 
 Route::resource('cabang', CabangController::class);
 
+
 /////////////////////
 
 Route::middleware('auth')->group(function () {
@@ -76,6 +77,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // // role admin
 // Route::get('/admin', [AdminController::class, 'index'])->name('pengguna.index');
+Route::get('/services', [ServiceController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

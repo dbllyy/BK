@@ -160,36 +160,29 @@
             </tr>
         </thead>
         <tbody>
+                @foreach ($beritaacaras as $beritaacara)
             <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>PC-01</td>
-                <td>Cabang A</td>
-                <td>HP</td>
-                <td>Service Rutin</td>
-                <td>Selesai</td>
-                <td>Bisa Diambil</td>
-                <td>01-01-2024</td>
+                <td>{{ $beritaacara->id }}</td>
+                <td>{{ $beritaacara->staff }}</td>
+                <td>{{ $beritaacara->komputer }}</td>
+                <td>{{ $beritaacara->cabang }}</td>
+                <td>{{ $beritaacara->merek }}</td>
+                <td>{{ $beritaacara->service }}</td>
+                <td>{{ $beritaacara->status }}</td>
+                <td>{{ $beritaacara->keterangan }}</td>
+                <td>{{ $beritaacara->tgl_diambil }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <a href="{{ route('beritaacaras.show', $beritaacara->id) }}">Lihat</a>
+                    <a href="{{ route('beritaacaras.edit', $beritaacara->id) }}">Edit</a>
+                    <form action="{{ route('beritaacaras.destroy', $beritaacara->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Hapus</button>
+                    </form>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>PC-02</td>
-                <td>Cabang B</td>
-                <td>Dell</td>
-                <td>Service Khusus</td>
-                <td>Gagal</td>
-                <td>Di Kembalikan</td>
-                <td>02-01-2024</td>
-                <td>
-                  <button class="btn btn-sm btn-primary">Edit</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>

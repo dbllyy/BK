@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function index()
-    {
-        // Fetch data from the database if needed
-        return view('services.index'); // Change to your actual view file
-    }
+{
+    // Fetch services from the database
+    $services = Service::all(); // Adjust this if you want specific conditions
+
+    // Pass the $services variable to the view
+    return view('services.index', compact('services'));
+}
 
     public function create()
     {
