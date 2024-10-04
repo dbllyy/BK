@@ -13,10 +13,6 @@ use App\Http\Controllers\CabangController;
 use App\Http\Controllers\AdminController;
 
 
-
-
-
-
 Route::get('/', function () {
     return view('admin.index');
 });
