@@ -19,7 +19,7 @@ class CabangController extends Controller
 
     public function create()
     {
-        return view('cabang.create');
+        return view('cabangs.create');
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class CabangController extends Controller
         // Save the cabang data to the database
         // Example: cabang::create($request->all());
 
-        return redirect()->route('cabang.index')->with('success', 'cabang created successfully!');
+        return redirect()->route('cabangs.index')->with('success', 'cabang created successfully!');
     }
 
     public function show($id)
@@ -45,7 +45,7 @@ class CabangController extends Controller
     public function edit($id)
     {
         // Fetch the cabang for editing
-        return view('cabang.edit', compact('id')); // Adjust as needed
+        return view('cabangs.edit', compact('id')); // Adjust as needed
     }
 
     public function update(Request $request, $id)
@@ -59,7 +59,7 @@ class CabangController extends Controller
         // Update the cabang data in the database
         // Example: cabang::find($id)->update($request->all());
 
-        return redirect()->route('cabang.index')->with('success', 'cabang updated successfully!');
+        return redirect()->route('cabangs.index')->with('success', 'cabang updated successfully!');
     }
 
     public function destroy($id)
@@ -67,6 +67,6 @@ class CabangController extends Controller
         // Delete the cabang
         // Example: cabang::destroy($id);
 
-        return redirect()->route('cabang.index')->with('success', 'cabang deleted successfully!');
+        return redirect()->route('cabangs.index')->with('success', 'cabang deleted successfully!');
     }
 }

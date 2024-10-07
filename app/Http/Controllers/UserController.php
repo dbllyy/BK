@@ -8,69 +8,82 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // Display a listing of the users
     public function index()
     {
         $users = User::all();
-        return view('user.index', compact('users'));
+        return view('users.index', compact('users'));
     }
-    
 
+    // Show the form for creating a new user
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    // Store a newly created user in storage
     public function store(Request $request)
     {
-        $request->validate([
-            'NIP' => 'required|string|unique:users,NIP',
-            'Nama_Staff' => 'required|string',
-            'Role' => 'required|in:admin,staff',
-            'password' => 'required|string|min:8',
+        $validatedData = $request->validate([
+            'NIP' => 'required|unique:users,NIP',
+            'Nama_Staff' => 'required|string|max:255',
+            'Role' => 'required|string|max:255',
+            'password' => 'required|string|min:6',
         ]);
 
-        $user = User::create([
-            'NIP' => $request->NIP,
-            'Nama_Staff' => $request->Nama_Staff,
-            'Role' => $request->Role,
-            'password' => Hash::make($request->password),
+        User::create([
+            'NIP' => $validatedData['NIP'],
+            'Nama_Staff' => $validatedData['Nama_Staff'],
+            'Role' => $validatedData['Role'],
+            'password' => Hash::make($validatedData['password']),
         ]);
 
-        return response()->json($user, 201);
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
+    // Display the specified user
     public function show($NIP)
     {
-        return User::findOrFail($NIP);
+        $user = User::findOrFail($NIP);
+        return view('users.show', compact('user'));
     }
 
+    // Show the form for editing the specified user
+    public function edit($NIP)
+    {
+        $user = User::findOrFail($NIP);
+        return view('users.edit', compact('user'));
+    }
+
+    // Update the specified user in storage
     public function update(Request $request, $NIP)
     {
-        $request->validate([
-            'Nama_Staff' => 'string',
-            'Role' => 'in:admin,staff',
-            'password' => 'string|min:8|nullable',
+        $user = User::findOrFail($NIP);
+
+        $validatedData = $request->validate([
+            'Nama_Staff' => 'required|string|max:255',
+            'Role' => 'required|string|max:255',
+            'password' => 'nullable|string|min:6',
         ]);
 
-        $user = User::findOrFail($NIP);
-        $user->fill($request->only('Nama_Staff', 'Role'));
+        $user->Nama_Staff = $validatedData['Nama_Staff'];
+        $user->Role = $validatedData['Role'];
 
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            $user->password = Hash::make($validatedData['password']);
         }
 
         $user->save();
 
-        return response()->json($user);
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
-/*************  ✨ Codeium Command ⭐  *************/
-    /**
-     * Delete a user.
-     *
-     * @param  string  $NIP
-     * @return \Illuminate\Http\Response
-     */
-/******  620200fd-6df6-4f09-8ed4-6c7ed1055b98  *******/    public function destroy($NIP)
+    // Remove the specified user from storage
+    public function destroy($NIP)
     {
         $user = User::findOrFail($NIP);
         $user->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

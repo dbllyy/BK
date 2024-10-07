@@ -14,7 +14,7 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('login.index');
 });
 
 Route::get('/dashboard', function () {
@@ -37,6 +37,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 
 ////////////////
 
+// Route::resource('user', UserController::class);
 Route::resource('user', UserController::class);
 
 ////////////////
