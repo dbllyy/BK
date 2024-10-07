@@ -157,18 +157,18 @@
         <tbody>
         @foreach ($users as $user)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->nip }}</td>
-                <td>{{ $user->role }}</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $user->Nama_Staff }}</td>
+                <td>{{ $user->NIP }}</td>
+                <td>{{ $user->Role }}</td>
                 <td>
-                    <a href="{{ route('users.show', $user->id) }}">Lihat</a>
+                    {{-- <a href="{{ route('users.show', $user->id) }}">Lihat</a>
                     <a href="{{ route('users.edit', $user->id) }}">Edit</a>
                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Hapus</button>
-                    </form>
+                    </form> --}}
                 </td>
             </tr>
                 @endforeach

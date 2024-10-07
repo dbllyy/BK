@@ -38,7 +38,12 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 ////////////////
 
 // Route::resource('user', UserController::class);
-Route::resource('user', UserController::class);
+// Route::resource('/user', UserController::class);
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user', [UserController::class, 'store']);
+Route::get('/user/{NIP}', [UserController::class, 'show']);
+Route::put('/user/{NIP}', [UserController::class, 'update']);
+Route::delete('/user/{NIP}', [UserController::class, 'destroy']);
 
 ////////////////
 
