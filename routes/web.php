@@ -47,7 +47,7 @@ Route::resource('komputer', KomputerController::class);
 
 //////////////
 
-Route::resource('services', ServiceController::class);
+// Route::resource('services', ServiceController::class);
 
 //////////////
 

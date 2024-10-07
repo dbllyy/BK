@@ -4,86 +4,77 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // Display a listing of the users
     public function index()
     {
-        $users = User::all();
+        // Fetch all users from the database
+        $users = User::all(); // Adjust if needed to add specific conditions
+
+        // Pass the $users variable to the view
         return view('users.index', compact('users'));
     }
 
-    // Show the form for creating a new user
     public function create()
     {
+        // Return the form for creating a new user
         return view('users.create');
     }
 
-    // Store a newly created user in storage
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'NIP' => 'required|unique:users,NIP',
+        // Validate and store data
+        $request->validate([
+            'NIP' => 'required|string|max:255|unique:users,NIP',
             'Nama_Staff' => 'required|string|max:255',
             'Role' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
         ]);
 
+        // Save the user data to the database
         User::create([
-            'NIP' => $validatedData['NIP'],
-            'Nama_Staff' => $validatedData['Nama_Staff'],
-            'Role' => $validatedData['Role'],
-            'password' => Hash::make($validatedData['password']),
+            'NIP' => $request->NIP,
+            'Nama_Staff' => $request->Nama_Staff,
+            'Role' => $request->Role,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully!');
     }
 
-    // Display the specified user
-    public function show($NIP)
-    {
-        $user = User::findOrFail($NIP);
-        return view('users.show', compact('user'));
-    }
-
-    // Show the form for editing the specified user
     public function edit($NIP)
     {
+        // Fetch the user for editing by NIP
         $user = User::findOrFail($NIP);
+
+        // Return the edit form with user data
         return view('users.edit', compact('user'));
     }
 
-    // Update the specified user in storage
     public function update(Request $request, $NIP)
     {
-        $user = User::findOrFail($NIP);
-
-        $validatedData = $request->validate([
+        // Validate and update the user data
+        $request->validate([
             'Nama_Staff' => 'required|string|max:255',
             'Role' => 'required|string|max:255',
-            'password' => 'nullable|string|min:6',
         ]);
 
-        $user->Nama_Staff = $validatedData['Nama_Staff'];
-        $user->Role = $validatedData['Role'];
+        // Update the user data in the database
+        $user = User::findOrFail($NIP);
+        $user->update($request->all());
 
-        if ($request->filled('password')) {
-            $user->password = Hash::make($validatedData['password']);
-        }
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index')->with('success', 'User updated successfully!');
     }
 
-    // Remove the specified user from storage
     public function destroy($NIP)
     {
-        $user = User::findOrFail($NIP);
-        $user->delete();
+        // Delete the user by NIP
+        User::destroy($NIP);
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully!');
+    }
+    public function show($NIP)
+    {
+        $user = User::findOrFail($NIP);
+        return view('users.show', compact('users')); // Return the view with the computer details
     }
 }

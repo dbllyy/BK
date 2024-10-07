@@ -25,7 +25,14 @@ Route::delete('cabangs/{No_Cabang}', [CabangController::class, 'destroy']);
 // Rute untuk User
 Route::get('users', [UserController::class, 'index']);
 Route::post('users', [UserController::class, 'store']);
-Route::get('users/{id}', [UserController::class, 'show']);
-Route::put('users/{id}', [UserController::class, 'update']);
-Route::delete('users/{id}', [UserController::class, 'destroy']);
+Route::get('users/{NIP}', [UserController::class, 'show']);
+Route::put('users/{NIP}', [UserController::class, 'update']);
+Route::delete('users/{NIP}', [UserController::class, 'destroy']);
+
+// Rute untuk User
+Route::get('services', [UserController::class, 'index']);
+Route::post('services', [UserController::class, 'store']);
+Route::get('services/{id}', [UserController::class, 'show']);
+Route::put('services/{id}', [UserController::class, 'update']);
+Route::delete('services/{id}', [UserController::class, 'destroy']);
 
