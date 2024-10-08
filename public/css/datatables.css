@@ -92,6 +92,7 @@ table.dataTable thead > tr > td.dt-ordering-asc span.dt-column-order:before {
   bottom: 50%;
   content: "▲";
   content: "▲"/"";
+  color: #000;
 }
 table.dataTable thead > tr > th.dt-orderable-desc span.dt-column-order:after, table.dataTable thead > tr > th.dt-ordering-desc span.dt-column-order:after,
 table.dataTable thead > tr > td.dt-orderable-desc span.dt-column-order:after,
@@ -101,6 +102,7 @@ table.dataTable thead > tr > td.dt-ordering-desc span.dt-column-order:after {
   top: 50%;
   content: "▼";
   content: "▼"/"";
+  
 }
 table.dataTable thead > tr > th.dt-orderable-asc, table.dataTable thead > tr > th.dt-orderable-desc, table.dataTable thead > tr > th.dt-ordering-asc, table.dataTable thead > tr > th.dt-ordering-desc,
 table.dataTable thead > tr > td.dt-orderable-asc,
@@ -120,6 +122,7 @@ table.dataTable thead > tr > td.dt-ordering-desc span.dt-column-order {
   top: 0;
   bottom: 0;
   width: 12px;
+  color:#000;
 }
 table.dataTable thead > tr > th.dt-orderable-asc span.dt-column-order:before, table.dataTable thead > tr > th.dt-orderable-asc span.dt-column-order:after, table.dataTable thead > tr > th.dt-orderable-desc span.dt-column-order:before, table.dataTable thead > tr > th.dt-orderable-desc span.dt-column-order:after, table.dataTable thead > tr > th.dt-ordering-asc span.dt-column-order:before, table.dataTable thead > tr > th.dt-ordering-asc span.dt-column-order:after, table.dataTable thead > tr > th.dt-ordering-desc span.dt-column-order:before, table.dataTable thead > tr > th.dt-ordering-desc span.dt-column-order:after,
 table.dataTable thead > tr > td.dt-orderable-asc span.dt-column-order:before,
@@ -360,6 +363,7 @@ table.dataTable > thead > tr > th,
 table.dataTable > thead > tr > td {
   padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
 table.dataTable > thead > tr > th:active,
 table.dataTable > thead > tr > td:active {
