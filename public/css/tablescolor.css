@@ -75,3 +75,107 @@ h3.font-weight-bold {
     font-size: 14px;   /* Adjust font size */
 }
 
+/* Base table styling */
+.table-responsive {
+    margin-top: 20px;
+}
+
+table#sampleTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table#sampleTable thead th {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    padding: 12px;
+}
+
+table#sampleTable tbody td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table#sampleTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table#sampleTable tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Table borders */
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd !important;
+}
+
+/* Adjust column width for "Aksi" */
+table#sampleTable th[scope="col"]:nth-child(5) {
+    width: 123px;
+}
+
+/* Custom styling for DataTables pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 6px 12px;
+    margin-left: 3px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #0056b3;
+}
+
+/* Search input styling */
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 5px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Length dropdown styling */
+.dataTables_wrapper .dataTables_length select {
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Sorting arrows for DataTables */
+table#sampleTable thead th.sorting:after,
+table#sampleTable thead th.sorting_asc:after,
+table#sampleTable thead th.sorting_desc:after {
+    content: "\f0dc"; /* Font Awesome icon */
+    float: right;
+    font-family: FontAwesome;
+    margin-right: 8px;
+}
+
+table#sampleTable thead th.sorting_asc:after {
+    content: "\f0de"; /* Font Awesome icon for ascending */
+}
+
+table#sampleTable thead th.sorting_desc:after {
+    content: "\f0dd"; /* Font Awesome icon for descending */
+}
+
+/* Info and paging at the bottom of DataTables */
+.dataTables_wrapper .dataTables_info {
+    margin-top: 15px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 15px;
+}

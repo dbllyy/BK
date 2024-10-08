@@ -25,9 +25,13 @@
 <link rel="stylesheet" href="{{ asset('css/tablescolor.css') }}">
 <link href="{{ asset('datatables.min.css') }}" rel="stylesheet">
 <!-- endinject -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="{{ asset('images/logokecil.png') }}">
 </head>
+<style>
+
+</style>
 
 <body>
   <div class="container-scroller">
@@ -148,6 +152,7 @@
 
 
         <div class="table-responsive">
+        
     <table class="table table-hover table-bordered" id="sampleTable">
         <thead>
             <tr>
@@ -220,16 +225,29 @@
 <script src="{{ asset('js/datatables.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#sampleTable').DataTable({
-            "order": [[0, "asc"]], // Urutkan kolom pertama (No) secara ascending
-            "columnDefs": [{
-                "targets": [4], // Kolom aksi tidak dapat diurutkan
-                "orderable": false
-            }]
-        });
-    });
+    
+
+    $('#sampleTable').DataTable({
+   "autoWidth": false, // Matikan autoWidth jika ada masalah dengan lebar kolom
+   "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ],
+   "columnDefs": [{
+      "targets": [4], // Kolom aksi tidak dapat diurutkan
+      "orderable": false
+   }]
+});
+
 </script>
+{{-- 
+$(document).ready(function() {
+        $('#sampleTable').DataTable({
+            "order": [[0, "asc"]], // Urutkan kolom pertama secara ascending
+            "columnDefs": [{
+                "targets": [4], // Kolom Aksi tidak bisa diurutkan
+                "orderable": false
+            }],
+            "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ] // Pilihan entries per page
+        });
+    }); --}}
 
   <!-- End custom js for this page-->
 </body>

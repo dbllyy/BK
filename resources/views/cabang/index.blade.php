@@ -7,21 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Task Management</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/feather/feather.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
-  <link rel="stylesheet" href="/css/tablescolor.css"> 
-  <link href="/datatables.min.css" rel="stylesheet">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="images/logokecil.png" />
+  <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
+<link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+<link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+<!-- endinject -->
+
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+<link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+<!-- End plugin css for this page -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/tablescolor.css') }}">
+<link href="{{ asset('datatables.min.css') }}" rel="stylesheet">
+<!-- endinject -->
+
+<link rel="shortcut icon" href="{{ asset('images/logokecil.png') }}">
 </head>
 
 
@@ -156,17 +160,17 @@
         <tbody>
                 @foreach ($cabangs as $cabang)
             <tr>
-                <td>{{ $cabang->id }}</td>
-                <td>{{ $cabang->cabang_id }}</td>
-                <td>{{ $cabang->cabang }}</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $cabang->No_Cabang }}</td>
+                <td>{{ $cabang->Nama_Cabang }}</td>
                 <td>
-                    <a href="{{ route('cabangs.show', $cabang->id) }}">Lihat</a>
+                    {{-- <a href="{{ route('cabangs.show', $cabang->id) }}">Lihat</a>
                     <a href="{{ route('cabangs.edit', $cabang->id) }}">Edit</a>
                     <form action="{{ route('cabangs.destroy', $cabang->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Hapus</button>
-                    </form>
+                    </form> --}}
                 </td>
             <tr>
 
@@ -188,29 +192,45 @@
 </div>
 
   <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="js/dataTables.select.min.js"></script>
+   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+<!-- endinject -->
 
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/Chart.roundedBarCharts.js"></script>
-  <script src="js/logout.js"></script>
-  <script src="js/htaccsess.js"></script>
-  <script src="js/datatables.min.js"></script>
+<!-- Plugin js for this page -->
+<script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('js/dataTables.select.min.js') }}"></script>
+<!-- End plugin js for this page -->
+
+<!-- inject:js -->
+<script src="{{ asset('js/off-canvas.js') }}"></script>
+<script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('js/template.js') }}"></script>
+<script src="{{ asset('js/settings.js') }}"></script>
+<script src="{{ asset('js/todolist.js') }}"></script>
+<!-- endinject -->
+
+<!-- Custom js for this page -->
+<script src="{{ asset('js/dashboard.js') }}"></script>
+<script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
+<script src="{{ asset('js/logout.js') }}"></script>
+<script src="{{ asset('js/htaccsess.js') }}"></script>
+<script src="{{ asset('js/datatables.min.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
   <!-- End custom js for this page-->
+  <script>
+    
+
+    $('#sampleTable').DataTable({
+   "autoWidth": false, // Matikan autoWidth jika ada masalah dengan lebar kolom
+   "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ],
+   "columnDefs": [{
+      "targets": [4], // Kolom aksi tidak dapat diurutkan
+      "orderable": false
+   }]
+});
+
+</script>
 </body>
 
 </html>
