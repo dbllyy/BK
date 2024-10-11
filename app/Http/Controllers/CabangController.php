@@ -13,7 +13,10 @@ class CabangController extends Controller
     $cabangs = Cabang::all(); // Adjust this if you want specific conditions
 
     // Pass the $services variable to the view
-    return view('cabang.index', compact('cabangs'));
+    return view('cabang.index', ['cabangs' => $cabangs]);
+
+    // return view('cabang.index', compact('cabangs'));
+
 }
 
 

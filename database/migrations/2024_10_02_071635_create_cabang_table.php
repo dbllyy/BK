@@ -11,7 +11,7 @@ class CreateCabangTable extends Migration
         Schema::create('cabangs', function (Blueprint $table) {
             $table->id('No_Cabang');  // Primary key
             $table->string('Nama_Cabang');  // Nama cabang
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

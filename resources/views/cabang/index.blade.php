@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Task Management</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
+<!-- plugins:css -->
+<link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
 <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
 <!-- endinject -->
@@ -24,10 +25,13 @@
 <link rel="stylesheet" href="{{ asset('css/tablescolor.css') }}">
 <link href="{{ asset('datatables.min.css') }}" rel="stylesheet">
 <!-- endinject -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="{{ asset('images/logokecil.png') }}">
 </head>
+<style>
 
+</style>
 
 <body>
   <div class="container-scroller">
@@ -133,14 +137,14 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Data Cabang</h3>
+                            <h3 class="font-weight-bold">Data User</h3>
                         </div>
                     </div>
                 </div>
             </div>
 
         <button type="button" class="btn btn-primary btn-custom mb-1" data-toggle="modal" data-target="#tambahBankSoalModal">
-            <i class="fa fa-plus"></i> Tambah Cabang
+            <i class="fa fa-plus"></i> Tambah User
         </button>
         <button class="btn btn-outline-primary btn-custom mb-1" type="button" onClick="window.location.reload()">
             <i class="fa fa-refresh"></i> Refresh
@@ -148,32 +152,33 @@
 
 
         <div class="table-responsive">
+        
     <table class="table table-hover table-bordered" id="sampleTable">
         <thead>
             <tr>
                 <th scope="col">No</th>
-                <th scope="col">No. Cabang</th>
+                <th scope="col">No Cabang</th>
                 <th scope="col">Nama Cabang</th>
                 <th style="width: 123px;" scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody>
-                @foreach ($cabangs as $cabang)
+        @foreach ($cabangs as $cabang)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $cabang->No_Cabang }}</td>
+                <td>{{ $cabang->id }}</td>
                 <td>{{ $cabang->Nama_Cabang }}</td>
                 <td>
-                    {{-- <a href="{{ route('cabangs.show', $cabang->id) }}">Lihat</a>
-                    <a href="{{ route('cabangs.edit', $cabang->id) }}">Edit</a>
-                    <form action="{{ route('cabangs.destroy', $cabang->id) }}" method="POST" style="display:inline;">
+                <button>Aksi</button>
+                    {{-- <a href="{{ route('users.show', $user->id) }}">Lihat</a>
+                    <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Hapus</button>
                     </form> --}}
                 </td>
-            <tr>
-
+            </tr>
                 @endforeach
 
                 </tbody>
@@ -192,7 +197,7 @@
 </div>
 
   <!-- plugins:js -->
-   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+ <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->
 
 <!-- Plugin js for this page -->
@@ -217,8 +222,8 @@
 <script src="{{ asset('js/htaccsess.js') }}"></script>
 <script src="{{ asset('js/datatables.min.js') }}"></script>
 <script src="{{ asset('js/datatables.js') }}"></script>
-  <!-- End custom js for this page-->
-  <script>
+
+<script>
     
 
     $('#sampleTable').DataTable({
@@ -231,6 +236,19 @@
 });
 
 </script>
+{{-- 
+$(document).ready(function() {
+        $('#sampleTable').DataTable({
+            "order": [[0, "asc"]], // Urutkan kolom pertama secara ascending
+            "columnDefs": [{
+                "targets": [4], // Kolom Aksi tidak bisa diurutkan
+                "orderable": false
+            }],
+            "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ] // Pilihan entries per page
+        });
+    }); --}}
+
+  <!-- End custom js for this page-->
 </body>
 
 </html>

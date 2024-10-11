@@ -13,7 +13,7 @@ class Cabang extends Model
     protected $table = 'cabangs'; // Consider using plural name if possible
 
     // Specify the primary key
-    protected $primaryKey = 'No_Cabang';
+    protected $primaryKey = 'id';
 
     // Disable auto-incrementing if the primary key is not auto-incrementing
     public $incrementing = false;
@@ -22,5 +22,5 @@ class Cabang extends Model
     protected $keyType = 'string'; 
 
     // Specify which fields can be mass-assigned
-    protected $fillable = ['No_Cabang', 'Nama_Cabang'];
+    protected $fillable = ['id', 'Nama_Cabang'];
 }
