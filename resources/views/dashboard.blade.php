@@ -129,17 +129,19 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 grid-margin transparent">
-              <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-tale">
+        <div class="row">
+    <div class="col-md-6 grid-margin transparent">
+        <div class="row">
+            <div class="col-md-6 mb-4 stretch-card transparent">
+                <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Komputer Masuk</p>
-                      <p class="fs-30 mb-2">4006</p>
+                        <p class="mb-4">Jumlah Pengguna</p>
+                        <p class="fs-30 mb-2">{{ $userCount }}</p> <!-- Display the user count -->
                     </div>
-                  </div>
                 </div>
+            </div>
+    
+
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">

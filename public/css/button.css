@@ -1,0 +1,26 @@
+#btn-view, #btn-edit, #btn-delete {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+#btn-view {
+    background-color: #17a2b8; /* Warna biru */
+}
+
+#btn-edit {
+    background-color: #ffc107; /* Warna kuning */
+}
+
+#btn-delete {
+    background-color: #dc3545; /* Warna merah */
+}
+
+#btn-view:hover, #btn-edit:hover, #btn-delete:hover {
+    opacity: 0.9;
+}

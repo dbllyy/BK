@@ -10,10 +10,11 @@ class UserController extends Controller
     public function index()
     {
         // Fetch all users from the database
-        $users = User::all(); // Adjust if needed to add specific conditions
+        $users = User::all();
 
         // Pass the $users variable to the view
         return view('users.index', compact('users'));
+        
     }
 
     public function create()
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function edit($NIP)
     {
         // Fetch the user for editing by NIP
-        $user = User::findOrFail($NIP);
+        $user = User::where('NIP', $NIP)->firstOrFail();
 
         // Return the edit form with user data
         return view('users.edit', compact('user'));
@@ -59,7 +60,7 @@ class UserController extends Controller
         ]);
 
         // Update the user data in the database
-        $user = User::findOrFail($NIP);
+        $user = User::where('NIP', $NIP)->firstOrFail();
         $user->update($request->all());
 
         return redirect()->route('users.index')->with('success', 'User updated successfully!');
@@ -68,13 +69,22 @@ class UserController extends Controller
     public function destroy($NIP)
     {
         // Delete the user by NIP
-        User::destroy($NIP);
+        $user = User::where('NIP', $NIP)->firstOrFail();
+        $user->delete();
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
     }
+
     public function show($NIP)
     {
-        $user = User::findOrFail($NIP);
-        return view('users.show', compact('users')); // Return the view with the computer details
+        // Fetch the user by NIP for the show page
+        $user = User::where('NIP', $NIP)->firstOrFail();
+
+        return view('users.show', compact('user')); // Return the view with the user details
+    }
+
+    public function dashboard() {
+        $userCount = User::count(); // Get the total number of users
+        return view('dashboard', compact('userCount')); // Pass the count to the view
     }
 }

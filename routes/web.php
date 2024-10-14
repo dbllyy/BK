@@ -39,11 +39,27 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 
 // Route::resource('user', UserController::class);
 // Route::resource('/user', UserController::class);
-Route::get('/user', [UserController::class, 'index']);
-Route::post('/user', [UserController::class, 'store']);
-Route::get('/user/{NIP}', [UserController::class, 'show']);
-Route::put('/user/{NIP}', [UserController::class, 'update']);
-Route::delete('/user/{NIP}', [UserController::class, 'destroy']);
+
+// Route::get('/user', [UserController::class, 'index']);
+// Route::post('/user', [UserController::class, 'store']);
+// Route::get('/user/{NIP}', [UserController::class, 'show'])->name('users.shows');
+// Route::get('/user/{NIP}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+// Route::get('/user/{NIP}', [UserController::class, 'shows']);
+// Route::put('/user/{NIP}', [UserController::class, 'update']);
+// Route::delete('/user/{NIP}', [UserController::class, 'destroy']);
+
+
+Route::get('/user', [UserController::class, 'index'])->name('users.index');
+Route::post('/user', [UserController::class, 'store'])->name('users.store');
+Route::get('/user/{NIP}', [UserController::class, 'show'])->name('users.shows');
+Route::put('/user/{NIP}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/user/{NIP}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('/user/{NIP}/edit', [UserController::class, 'edit'])->name('users.edit'); 
+
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+// Tambahkan route ini
+
 
 ////////////////
 
