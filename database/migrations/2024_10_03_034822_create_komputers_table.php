@@ -12,9 +12,9 @@ class CreateKomputersTable extends Migration
             $table->id(); // Primary key
             $table->unsignedBigInteger('cabang_id'); // Foreign key to 'cabangs'
             $table->integer('jumlah');
-            $table->enum('kondisi', ['baru', 'second']);
+            $table->enum('kondisi', ['baru', 'baru rakitan','second']);
             $table->text('keterangan')->nullable();
-            $table->timestamps();
+            $table->timestamps('diterima');
 
             // Foreign key constraint
             $table->foreign('cabang_id')->references('No_Cabang')->on('cabangs')->onDelete('cascade');

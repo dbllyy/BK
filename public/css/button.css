@@ -10,15 +10,15 @@
 }
 
 #btn-view {
-    background-color: #17a2b8; /* Warna biru */
+    background-color: #35575c; /* Warna biru */
 }
 
 #btn-edit {
-    background-color: #ffc107; /* Warna kuning */
+    background-color: #3a8e62; /* Warna kuning */
 }
 
 #btn-delete {
-    background-color: #dc3545; /* Warna merah */
+    background-color: #a5454e; /* Warna merah */
 }
 
 #btn-view:hover, #btn-edit:hover, #btn-delete:hover {

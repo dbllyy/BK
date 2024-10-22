@@ -37,17 +37,6 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 
 ////////////////
 
-// Route::resource('user', UserController::class);
-// Route::resource('/user', UserController::class);
-
-// Route::get('/user', [UserController::class, 'index']);
-// Route::post('/user', [UserController::class, 'store']);
-// Route::get('/user/{NIP}', [UserController::class, 'show'])->name('users.shows');
-// Route::get('/user/{NIP}/edit', [UserController::class, 'edit'])->name('users.edit');
-
-// Route::get('/user/{NIP}', [UserController::class, 'shows']);
-// Route::put('/user/{NIP}', [UserController::class, 'update']);
-// Route::delete('/user/{NIP}', [UserController::class, 'destroy']);
 
 
 Route::get('/user', [UserController::class, 'index'])->name('users.index');
@@ -63,6 +52,18 @@ Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard'
 
 ////////////////
 
+// Routes untuk CabangController
+Route::get('/cabang', [CabangController::class, 'index'])->name('cabangs.index');
+Route::post('/cabang', [CabangController::class, 'store'])->name('cabangs.store');
+Route::get('/cabang/{No_Cabang}', [CabangController::class, 'show'])->name('cabangs.show');
+Route::put('/cabang/{No_Cabang}', [CabangController::class, 'update'])->name('cabangs.update');
+Route::delete('/cabang/{No_Cabang}', [CabangController::class, 'destroy'])->name('cabangs.destroy');
+Route::get('/cabang/{No_Cabang}/edit', [CabangController::class, 'edit'])->name('cabangs.edit');
+
+Route::get('/dashboard', [CabangController::class, 'dashboard'])->name('dashboard');
+
+///////////////////
+
 Route::resource('komputer', KomputerController::class);
 
 
@@ -75,8 +76,6 @@ Route::resource('komputer', KomputerController::class);
 Route::resource('beritaacara', BeritaController::class);
 
 //////////////
-
-Route::resource('cabang', CabangController::class);
 
 
 /////////////////////

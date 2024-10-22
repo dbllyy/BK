@@ -136,7 +136,7 @@
                 <div class="card card-tale">
                     <div class="card-body">
                         <p class="mb-4">Jumlah Pengguna</p>
-                        <p class="fs-30 mb-2">{{ $userCount }}</p> <!-- Display the user count -->
+                        {{-- <p class="fs-30 mb-2">{{ $userCount }}</p> <!-- Display the user count --> --}}
                     </div>
                 </div>
             </div>
@@ -145,8 +145,8 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">Komputer Dalam Perbaikan</p>
-                      <p class="fs-30 mb-2">61344</p>
+                      <p class="mb-4">Jumlah Cabang</p>
+                      <p class="fs-30 mb-2">{{ $cabangCount }}</p>
                     </div>
                   </div>
                 </div>

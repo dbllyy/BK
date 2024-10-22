@@ -150,11 +150,10 @@
                         <th scope="col">No</th>
                         <th scope="col">Cabang</th>
                         <th scope="col">Komputer</th>
-                        {{-- <th scope="col">Staff</th> --}}
+                        <th scope="col">Merk</th>
                         <th scope="col">Jumlah</th>
                         <th scope="col">Kondisi</th>
                         <th scope="col">Keterangan</th>
-                        <th scope="col">Service</th>
                         <th scope="col">Di Terima</th>
                         <th style="width: 123px;" scope="col">Aksi</th>
                     </tr>

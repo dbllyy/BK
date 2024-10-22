@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +15,6 @@ class UserController extends Controller
 
         // Pass the $users variable to the view
         return view('users.index', compact('users'));
-        
     }
 
     public function create()
@@ -25,21 +25,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // Validate and store data
         $request->validate([
-            'NIP' => 'required|string|max:255|unique:users,NIP',
             'Nama_Staff' => 'required|string|max:255',
-            'Role' => 'required|string|max:255',
+            'NIP' => 'required|unique:users,NIP',
+            'password' => 'required|string|min:8',
+            'Role' => 'required|string',
         ]);
 
-        // Save the user data to the database
         User::create([
-            'NIP' => $request->NIP,
             'Nama_Staff' => $request->Nama_Staff,
+            'NIP' => $request->NIP,
+            'password' => Hash::make($request->password),
             'Role' => $request->Role,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully!');
+        // Set session flash message
+        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
     }
 
     public function edit($NIP)
@@ -51,19 +52,28 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $NIP)
+    public function update(Request $request, $nip)
     {
-        // Validate and update the user data
         $request->validate([
             'Nama_Staff' => 'required|string|max:255',
-            'Role' => 'required|string|max:255',
+            'NIP' => 'required',
+            'Role' => 'required|string',
         ]);
 
-        // Update the user data in the database
-        $user = User::where('NIP', $NIP)->firstOrFail();
-        $user->update($request->all());
+        $user = User::where('NIP', $nip)->firstOrFail();
+        $user->Nama_Staff = $request->Nama_Staff;
+        $user->NIP = $request->NIP;
+        $user->Role = $request->Role;
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully!');
+        // Update password jika tidak kosong
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        // Set session flash message
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
 
     public function destroy($NIP)
@@ -83,8 +93,9 @@ class UserController extends Controller
         return view('users.show', compact('user')); // Return the view with the user details
     }
 
-    public function dashboard() {
-        $userCount = User::count(); // Get the total number of users
-        return view('dashboard', compact('userCount')); // Pass the count to the view
-    }
+    // public function dashboard()
+    // {
+    //     $userCount = User::count(); // Hitung jumlah pengguna
+    //     return view('dashboard', compact('userCount'));
+    // }
 }

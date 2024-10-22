@@ -151,10 +151,8 @@
                 <th scope="col">Staff</th>
                 <th scope="col">Komputer</th>
                 <th scope="col">Cabang</th>
-                <th scope="col">Merek</th>
                 <th scope="col">Service</th>
                 <th scope="col">Status</th>
-                <th scope="col">Di Kerjakan</th>
                 <th style="width: 123px;" scope="col">Aksi</th>
             </tr>
         </thead>

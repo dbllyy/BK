@@ -58,7 +58,7 @@ h3.font-weight-bold {
     padding: 12px;
     text-align: left;
     border: 1px solid #7d7d7d; /* Slightly darker border color */
-    background-color: #d3d3d3; /* Darker grey for table cells */
+    background-color: #ffffff; /* Darker grey for table cells */
 }
 
 .table th {
@@ -86,7 +86,7 @@ table#sampleTable {
 }
 
 table#sampleTable thead th {
-    background-color: #007bff;
+    background-color: #4b49ac;
     color: white;
     text-align: center;
     font-weight: bold;
@@ -115,7 +115,7 @@ table#sampleTable tbody tr:hover {
 
 .table-bordered th,
 .table-bordered td {
-    border: 1px solid #ddd !important;
+    border: 1px solid #000000 !important;
 }
 
 /* Adjust column width for "Aksi" */
@@ -127,7 +127,7 @@ table#sampleTable th[scope="col"]:nth-child(5) {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 6px 12px;
     margin-left: 3px;
-    background-color: #007bff;
+    background-color: #333239;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -135,7 +135,7 @@ table#sampleTable th[scope="col"]:nth-child(5) {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #0056b3;
+    background-color: #333239;
 }
 
 /* Search input styling */
