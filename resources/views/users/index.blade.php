@@ -69,7 +69,6 @@
                                         <a href="javascript:void(0)" id="btn-delete"
                                             onclick="konfirmasiHapus('{{ route('users.destroy', $user->NIP) }}')">Hapus</a>
                                     </form>
-                                </td>
 
                             </tr>
                         @endforeach
