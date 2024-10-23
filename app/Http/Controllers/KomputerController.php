@@ -47,10 +47,10 @@ class KomputerController extends Controller
 
     // Menampilkan data komputer berdasarkan ID
     public function show($id)
-    {
-        $komputer = Komputer::findOrFail($id);
-        return view('komputers.show', compact('komputer')); // Return the view with the computer details
-    }
+{
+    $komputer = Komputer::findOrFail($id);
+    return view('komputers.show', compact('komputer'));
+}
 
     // Menampilkan form untuk mengedit data komputer
     public function edit($id)

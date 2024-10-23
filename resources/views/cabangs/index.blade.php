@@ -60,25 +60,30 @@
                                 <td>{{ $cabang->Nama_Cabang }}</td>
                                 <td>
                                     <!-- Tombol Lihat Cabang -->
-                                    <a href="javascript:void(0)" onclick="lihatCabang('{{ $cabang->No_Cabang }}', '{{ $cabang->Nama_Cabang }}')"
-                                        id="btn-view">Lihat</a>
-
-                                    <!-- Tombol Edit Cabang -->
-                                    <a href="javascript:void(0)" 
-                                        onclick="editCabang('{{ $cabang->No_Cabang }}', '{{ $cabang->Nama_Cabang }}', '{{ route('cabangs.update', $cabang->No_Cabang) }}')" 
-                                        id="btn-edit">Edit
+                                    <a href="javascript:void(0)" class="btn btn-info btn-sm p-1" title="Lihat"
+                                        onclick="lihatCabang('{{ $cabang->No_Cabang }}', '{{ $cabang->Nama_Cabang }}')">
+                                        <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
                                     </a>
 
-                                    <!-- Form Hapus Cabang dengan AJAX -->
+                                    <!-- Tombol Edit Cabang -->
+                                    <a href="javascript:void(0)" class="btn btn-warning btn-sm p-1" title="Edit"
+                                        onclick="editCabang('{{ $cabang->No_Cabang }}', '{{ $cabang->Nama_Cabang }}', '{{ route('cabangs.update', $cabang->No_Cabang) }}')">
+                                        <i class="ti-pencil" style="font-size: 14px;"></i>
+                                        <!-- Ikon Themify untuk "Edit" -->
+                                    </a>
+
+                                    <!-- Tombol Hapus Cabang dengan AJAX -->
                                     <form action="javascript:void(0);" method="POST" style="display:inline;"
                                         id="form-hapus-{{ $cabang->No_Cabang }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="javascript:void(0)" id="btn-delete"
-                                            onclick="konfirmasiHapusCabang('{{ route('cabangs.destroy', $cabang->No_Cabang) }}')">Hapus</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm p-1" title="Hapus"
+                                            onclick="konfirmasiHapusCabang('{{ route('cabangs.destroy', $cabang->No_Cabang) }}')">
+                                            <i class="ti-trash" style="font-size: 14px;"></i>
+                                            <!-- Ikon Themify untuk "Hapus" -->
+                                        </a>
                                     </form>
-
-                            </tr>
+                                </td>
                         @endforeach
                     </tbody>
                 </table>
@@ -226,7 +231,5 @@
                     $('#hapusCabangForm').attr('action', deleteUrl);
                     $('#hapusCabangModal').modal('show');
                 }
-
-             
             </script>
         @endsection

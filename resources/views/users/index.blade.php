@@ -59,14 +59,14 @@
                                 <td>{{ $user->Role }}</td>
                                 <td>
                                     <!-- Tombol Lihat -->
-                                    <a href="javascript:void(0)" id="btn-view" class="btn btn-info btn-sm p-1"
+                                    <a href="javascript:void(0)" class="btn btn-info btn-sm p-1"
                                         title="Lihat"
                                         onclick="lihatUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}')">
                                         <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
                                     </a>
 
                                     <!-- Tombol Edit -->
-                                    <a href="javascript:void(0)" id="btn-edit" class="btn btn-warning btn-sm p-1"
+                                    <a href="javascript:void(0)" class="btn btn-warning btn-sm p-1"
                                         title="Edit"
                                         onclick="editUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}', '{{ route('users.update', $user->NIP) }}')">
                                         <i class="ti-pencil" style="font-size: 14px;"></i>
@@ -133,44 +133,31 @@
                 </div>
             </div>
             <!-- Modal Lihat User -->
-            <div class="modal fade" id="lihatUserModal" tabindex="-1" role="dialog"
-                aria-labelledby="lihatUserModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="lihatUserModalLabel">Lihat Data User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="lihatNama_Staff">Nama Staff</label>
-                                <input type="text" class="form-control" id="lihatNama_Staff" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="lihatNIP">NIP</label>
-                                <input type="text" class="form-control" id="lihatNIP" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="editRole">Role</label>
-                                <select name="Role" class="form-control" id="editRole" required>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Staff">Staff</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="text" class="form-control" value="*****" readonly>
-                                <small class="text-muted">Password tidak dapat dilihat.</small>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        </div>
+              <!-- Modal Lihat Data Perangkat -->
+        <div class="modal fade" id="lihatDetailModal" tabindex="-1" aria-labelledby="lihatDetailLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lihatDetailLabel">Detail Perangkat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Cabang:</strong> <span id="detailCabang"></span></p>
+                        <p><strong>Perangkat:</strong> <span id="detailPerangkat"></span></p>
+                        <p><strong>Merk:</strong> <span id="detailMerk"></span></p>
+                        <p><strong>Jumlah:</strong> <span id="detailJumlah"></span></p>
+                        <p><strong>Kondisi:</strong> <span id="detailKondisi"></span></p>
+                        <p><strong>Keterangan:</strong> <span id="detailKeterangan"></span></p>
+                        <p><strong>Di Terima:</strong> <span id="detailDiterima"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- Modal Edit User -->
             <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
                 aria-labelledby="editUserModalLabel" aria-hidden="true">
