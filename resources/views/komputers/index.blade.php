@@ -83,7 +83,6 @@
                                         <!-- Ikon Themify untuk "Hapus" -->
                                     </button>
                                 </form>
-                            </td>
                         </tr>
                     @endforeach
 

@@ -58,19 +58,32 @@
                                 <td>{{ $user->NIP }}</td>
                                 <td>{{ $user->Role }}</td>
                                 <td>
-                                    <a href="javascript:void(0)" id="btn-view"
-                                        onclick="lihatUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}')">Lihat</a>
-                                    <a href="javascript:void(0)" id="btn-edit"
-                                        onclick="editUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}', '{{ route('users.update', $user->NIP) }}')">Edit</a>
+                                    <!-- Tombol Lihat -->
+                                    <a href="javascript:void(0)" id="btn-view" class="btn btn-info btn-sm p-1"
+                                        title="Lihat"
+                                        onclick="lihatUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}')">
+                                        <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
+                                    </a>
+
+                                    <!-- Tombol Edit -->
+                                    <a href="javascript:void(0)" id="btn-edit" class="btn btn-warning btn-sm p-1"
+                                        title="Edit"
+                                        onclick="editUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}', '{{ route('users.update', $user->NIP) }}')">
+                                        <i class="ti-pencil" style="font-size: 14px;"></i>
+                                        <!-- Ikon Themify untuk "Edit" -->
+                                    </a>
+
+                                    <!-- Tombol Hapus -->
                                     <form action="{{ route('users.destroy', $user->NIP) }}" method="POST"
                                         style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="javascript:void(0)" id="btn-delete"
-                                            onclick="konfirmasiHapus('{{ route('users.destroy', $user->NIP) }}')">Hapus</a>
+                                        <button type="submit" class="btn btn-danger btn-sm p-1" title="Hapus">
+                                            <i class="ti-trash" style="font-size: 14px;"></i>
+                                            <!-- Ikon Themify untuk "Hapus" -->
+                                        </button>
                                     </form>
-
-                            </tr>
+                                </td>
                         @endforeach
                     </tbody>
                 </table>
@@ -139,7 +152,7 @@
                                 <label for="lihatNIP">NIP</label>
                                 <input type="text" class="form-control" id="lihatNIP" readonly>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="editRole">Role</label>
                                 <select name="Role" class="form-control" id="editRole" required>
                                     <option value="Admin">Admin</option>
@@ -229,30 +242,30 @@
                 </div>
             </div>
 
-       
-    <script>
-        // Fungsi untuk menampilkan modal lihat user
-        function lihatUser(nama, nip, role) {
-            $('#lihatNama_Staff').val(nama);
-            $('#lihatNIP').val(nip);
-            $('#lihatRole').val(role);
-            $('#lihatUserModal').modal('show');
-        }
 
-        // Fungsi untuk menampilkan modal edit user
-        function editUser(nama, nip, role, updateUrl) {
-            $('#editNama_Staff').val(nama);
-            $('#editNIP').val(nip);
-            $('#editRole').val(role);
-            $('#editPassword').val(''); // Kosongkan password
-            $('#editUserForm').attr('action', updateUrl);
-            $('#editUserModal').modal('show');
-        }
-    
-        // Fungsi untuk menampilkan modal konfirmasi hapus
-        function konfirmasiHapus(deleteUrl) {
-            $('#hapusUserForm').attr('action', deleteUrl);
-            $('#hapusUserModal').modal('show');
-        }
-    </script>
-@endsection
+            <script>
+                // Fungsi untuk menampilkan modal lihat user
+                function lihatUser(nama, nip, role) {
+                    $('#lihatNama_Staff').val(nama);
+                    $('#lihatNIP').val(nip);
+                    $('#lihatRole').val(role);
+                    $('#lihatUserModal').modal('show');
+                }
+
+                // Fungsi untuk menampilkan modal edit user
+                function editUser(nama, nip, role, updateUrl) {
+                    $('#editNama_Staff').val(nama);
+                    $('#editNIP').val(nip);
+                    $('#editRole').val(role);
+                    $('#editPassword').val(''); // Kosongkan password
+                    $('#editUserForm').attr('action', updateUrl);
+                    $('#editUserModal').modal('show');
+                }
+
+                // Fungsi untuk menampilkan modal konfirmasi hapus
+                function konfirmasiHapus(deleteUrl) {
+                    $('#hapusUserForm').attr('action', deleteUrl);
+                    $('#hapusUserModal').modal('show');
+                }
+            </script>
+        @endsection
