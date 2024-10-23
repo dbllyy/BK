@@ -10,19 +10,18 @@ class CreateKomputersTable extends Migration
     {
         Schema::create('komputers', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->unsignedBigInteger('cabang_id'); // Foreign key to 'cabangs'
-            $table->integer('jumlah');
-            $table->enum('kondisi', ['baru', 'baru rakitan','second']);
-            $table->text('keterangan')->nullable();
-            $table->timestamps('diterima');
-
-            // Foreign key constraint
-            $table->foreign('cabang_id')->references('No_Cabang')->on('cabangs')->onDelete('cascade');
+            $table->unsignedBigInteger('cabang_id'); // Foreign key ke 'cabangs'
+            $table->enum('perangkat', ['PC', 'Laptop', 'Printer']); // Jenis perangkat
+            $table->string('merk'); // Merk perangkat
+            $table->integer('jumlah'); // Jumlah perangkat
+            $table->enum('kondisi', ['baru', 'baru rakitan', 'second']); // Kondisi perangkat
+            $table->text('keterangan')->nullable(); // Keterangan opsional
+            $table->timestamp('diterima')->useCurrent(); // Tanggal otomatis saat data ditambahkan
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('komputers');
+        Schema::dropIfExists('komputers'); // Menghapus tabel jika migrasi dibatalkan
     }
 }

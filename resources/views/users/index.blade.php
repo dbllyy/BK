@@ -229,8 +229,7 @@
                 </div>
             </div>
 
-        </div>
-    </div>
+       
     <script>
         // Fungsi untuk menampilkan modal lihat user
         function lihatUser(nama, nip, role) {

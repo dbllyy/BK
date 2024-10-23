@@ -229,41 +229,4 @@
 
              
             </script>
-
-            {{-- <script>
-               $('#tambahCabangForm').on('submit', function(e) {
-                    e.preventDefault();
-                    var formData = $(this).serialize();
-
-                    $.ajax({
-                        url: "{{ route('cabangs.store') }}",
-                        type: "POST",
-                        data: formData,
-                        success: function(response) {
-                            $('#tambahCabangModal').modal('hide'); // Tutup modal
-                            alert(response.success); // Tampilkan pesan sukses
-                            location.reload(); // Refresh halaman untuk memperbarui tabel
-                        },
-                        error: function(xhr) {
-                            // Tampilkan notifikasi error jika terjadi duplikasi atau error validasi lainnya
-                            if (xhr.status === 422) {
-                                var errors = xhr.responseJSON.errors;
-                                var errorMessage = '';
-
-                                if (errors.No_Cabang) {
-                                    errorMessage += 'No Cabang sudah ada. ';
-                                }
-
-                                if (errors.Nama_Cabang) {
-                                    errorMessage += 'Nama Cabang sudah ada.';
-                                }
-
-                                alert('Gagal menambahkan cabang: ' + errorMessage); // Tampilkan pesan error
-                            } else {
-                                alert('Gagal menambahkan cabang. Silakan coba lagi.');
-                            }
-                        }
-                    });
-                });
-                </script> --}}
         @endsection

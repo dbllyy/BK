@@ -11,27 +11,38 @@ class KomputerController extends Controller
     public function index()
     {
         $komputers = Komputer::all();
-        return view('komputer.index', compact('komputers')); // Return the view with the list of computers
+        $cabangs = \App\Models\Cabang::all(); // Mengambil semua cabang dari tabel cabangs
+        return view('komputers.index', compact('komputers', 'cabangs'));
     }
 
     // Menampilkan form untuk menambahkan komputer baru
     public function create()
     {
-        return view('komputers.create'); // Return the view for creating a new computer
+        $cabangs = \App\Models\Cabang::all(); // Mengambil semua cabang dari tabel cabangs
+        return view('komputers.create', compact('cabangs'));
     }
 
     // Menyimpan data komputer baru
     public function store(Request $request)
     {
+        // Validasi data yang dikirim dari form
         $validated = $request->validate([
-            'cabang_id' => 'required|exists:cabangs,id',
-            'jumlah' => 'required|integer',
-            'kondisi' => 'required|in:baru,second',
-            'keterangan' => 'nullable|string',
+            'cabang_id' => 'required|exists:cabangs,No_Cabang', // pastikan cabang_id cocok dengan No_Cabang
+            'perangkat' => 'required|in:PC,Laptop,Printer', // perangkat harus salah satu dari nilai enum
+            'merk' => 'required|string|max:255', // pastikan merk adalah string
+            'jumlah' => 'required|integer|min:1', // jumlah harus integer dan lebih dari 0
+            'kondisi' => 'required|in:baru,baru rakitan,second', // pastikan kondisi salah satu dari enum
+            'keterangan' => 'nullable|string', // keterangan opsional
         ]);
 
-        $komputer = Komputer::create($validated);
-        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil ditambahkan.'); // Redirect to index with success message
+        // Tambahkan waktu diterima secara otomatis
+        $validated['diterima'] = now();
+
+        // Simpan data ke database
+        Komputer::create($validated);
+
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('komputers.index')->with('success', 'Data perangkat berhasil disimpan.');
     }
 
     // Menampilkan data komputer berdasarkan ID
@@ -45,22 +56,27 @@ class KomputerController extends Controller
     public function edit($id)
     {
         $komputer = Komputer::findOrFail($id);
-        return view('komputers.edit', compact('komputer')); // Return the view for editing the computer
+        $cabangs = \App\Models\Cabang::all(); // Mengambil semua cabang dari tabel cabangs
+        return view('komputers.edit', compact('komputer', 'cabangs'));
     }
 
     // Mengupdate data komputer
     public function update(Request $request, $id)
     {
+        // Validasi input form
         $validated = $request->validate([
-            'cabang_id' => 'required|exists:cabangs,id',
+            'cabang_id' => 'required|exists:cabangs,No_Cabang', // Sesuaikan dengan primary key di cabangs
             'jumlah' => 'required|integer',
             'kondisi' => 'required|in:baru,second',
             'keterangan' => 'nullable|string',
         ]);
 
+        // Update data komputer
         $komputer = Komputer::findOrFail($id);
         $komputer->update($validated);
-        return redirect()->route('komputer.index')->with('success', 'Komputer berhasil diperbarui.'); // Redirect to index with success message
+
+        // Redirect ke index dengan pesan sukses
+        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil diperbarui.');
     }
 
     // Menghapus data komputer
@@ -68,6 +84,8 @@ class KomputerController extends Controller
     {
         $komputer = Komputer::findOrFail($id);
         $komputer->delete();
-        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil dihapus.'); // Redirect to index with success message
+
+        // Redirect ke index dengan pesan sukses
+        return redirect()->route('komputers.index')->with('success', 'Komputer berhasil dihapus.');
     }
 }

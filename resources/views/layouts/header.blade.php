@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+    
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
@@ -94,7 +95,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/komputer">
               <i class="ti-desktop menu-icon"></i>
-              <span class="menu-title">Komputer</span>
+              <span class="menu-title">Perangkat</span>
             </a>
           </li>
           <li class="nav-item">

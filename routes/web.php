@@ -64,7 +64,18 @@ Route::get('/dashboard', [CabangController::class, 'dashboard'])->name('dashboar
 
 ///////////////////
 
-Route::resource('komputer', KomputerController::class);
+
+Route::get('/komputer', [KomputerController::class, 'index'])->name('komputers.index');
+Route::get('/komputer/create', [KomputerController::class, 'create'])->name('komputers.create');
+Route::post('/komputer', [KomputerController::class, 'store'])->name('komputers.store');
+Route::get('/komputer/{id}', [KomputerController::class, 'show'])->name('komputers.show');
+Route::get('/komputer/{id}/edit', [KomputerController::class, 'edit'])->name('komputers.edit');
+Route::put('/komputer/{id}', [KomputerController::class, 'update'])->name('komputers.update');
+Route::delete('/komputer/{id}', [KomputerController::class, 'destroy'])->name('komputers.destroy');
+
+Route::get('/dashboard', [KomputerController::class, 'dashboard'])->name('dashboard');
+
+// Route::resource('komputer', KomputerController::class);
 
 
 //////////////

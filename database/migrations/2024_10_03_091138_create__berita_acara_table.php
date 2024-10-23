@@ -9,21 +9,21 @@ class CreateBeritaAcaraTable extends Migration
     public function up()
     {
         Schema::create('berita_acaras', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('komputer_id'); // Foreign key ke komputers
-            $table->unsignedBigInteger('cabang_id'); // Foreign key ke cabangs
-            $table->string('NIP'); // Menggunakan NIP sebagai foreign key
-            $table->string('merek');
-            $table->string('service');
-            $table->string('status');
-            $table->enum('keterangan', ['bisa diambil', 'dikembalikan'])->nullable();
-            $table->date('tgl_di_ambil')->nullable();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->unsignedBigInteger('komputer_id'); // Foreign key ke tabel komputers
+            $table->unsignedBigInteger('cabang_id'); // Foreign key ke tabel cabangs
+            $table->string('NIP'); // Foreign key ke tabel users (menggunakan NIP)
+            $table->string('merek'); // Kolom untuk menyimpan merek perangkat
+            $table->enum('service', ['install OS', 'service khusus', 'jaringan', 'full service']); // Pilihan jenis layanan
+            $table->enum('status', ['pending', 'selesai', 'dalam proses']); // Status layanan
+            $table->enum('keterangan', ['bisa diambil', 'dikembalikan'])->nullable(); // Keterangan (nullable)
+            $table->date('tgl_di_ambil')->nullable(); // Tanggal pengambilan perangkat (nullable)
+            $table->timestamps(); // Otomatis untuk created_at dan updated_at
 
             // Foreign key constraints
-            $table->foreign('NIP')->references('NIP')->on('users')->onDelete('cascade'); // Referensi ke NIP di tabel users
-            $table->foreign('komputer_id')->references('id')->on('komputers')->onDelete('cascade'); // Referensi ke tabel komputers
-            $table->foreign('cabang_id')->references('No_Cabang')->on('cabangs')->onDelete('cascade'); // Referensi ke No_Cabang di tabel cabangs
+            $table->foreign('NIP')->references('NIP')->on('users')->onDelete('cascade'); // Merujuk ke tabel users
+            $table->foreign('komputer_id')->references('id')->on('komputers')->onDelete('cascade'); // Merujuk ke tabel komputers
+            $table->foreign('cabang_id')->references('No_Cabang')->on('cabangs')->onDelete('cascade'); // Merujuk ke tabel cabangs
         });
     }
 
