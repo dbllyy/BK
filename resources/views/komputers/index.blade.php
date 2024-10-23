@@ -65,22 +65,25 @@
                             <td>{{ $komputer->kondisi }}</td>
                             <td>{{ $komputer->keterangan }}</td>
                             <td>{{ $komputer->diterima }}</td>
-                           <td>
-    <a href="javascript:void(0)" class="btn btn-info btn-sm p-1" title="Lihat"
-       onclick="lihatDetailKomputerModal('{{ $komputer->cabang->Nama_Cabang }}', '{{ $komputer->perangkat }}', '{{ $komputer->merk }}', '{{ $komputer->jumlah }}', '{{ $komputer->kondisi }}', '{{ $komputer->keterangan }}', '{{ $komputer->diterima }}')">
-       <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
-    </a>
-    <a href="{{ route('komputers.edit', $komputer->id) }}" class="btn btn-warning btn-sm p-1" title="Edit">
-        <i class="ti-pencil" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Edit" -->
-    </a>
-    <form action="{{ route('komputers.destroy', $komputer->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger btn-sm p-1" title="Hapus">
-            <i class="ti-trash" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Hapus" -->
-        </button>
-    </form>
-</td>
+                            <td>
+                                <a href="javascript:void(0)" class="btn btn-info btn-sm p-1" title="Lihat"
+                                    onclick="lihatDetailKomputerModal('{{ $komputer->cabang->Nama_Cabang }}', '{{ $komputer->perangkat }}', '{{ $komputer->merk }}', '{{ $komputer->jumlah }}', '{{ $komputer->kondisi }}', '{{ $komputer->keterangan }}', '{{ $komputer->diterima }}')">
+                                    <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
+                                </a>
+                                <a href="{{ route('komputers.edit', $komputer->id) }}" class="btn btn-warning btn-sm p-1"
+                                    title="Edit">
+                                    <i class="ti-pencil" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Edit" -->
+                                </a>
+                                <form action="{{ route('komputers.destroy', $komputer->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm p-1" title="Hapus">
+                                        <i class="ti-trash" style="font-size: 14px;"></i>
+                                        <!-- Ikon Themify untuk "Hapus" -->
+                                    </button>
+                                </form>
+                            </td>
                     @endforeach
 
                 </tbody>
@@ -157,66 +160,65 @@
             </div>
         </div>
 
-<!-- Modal Lihat Data Perangkat -->
-<div class="modal fade" id="lihatDetailKomputerModal" tabindex="-1" aria-labelledby="lihatDetailKomputerLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="lihatDetailKomputerLabel">Detail Komputer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Cabang:</strong> <span id="detailCabang"></span></p>
-                <p><strong>Perangkat:</strong> <span id="detailPerangkat"></span></p>
-                <p><strong>Merk:</strong> <span id="detailMerk"></span></p>
-                <p><strong>Jumlah:</strong> <span id="detailJumlah"></span></p>
-                <p><strong>Kondisi:</strong> <span id="detailKondisi"></span></p>
-                <p><strong>Keterangan:</strong> <span id="detailKeterangan"></span></p>
-                <p><strong>Di Terima:</strong> <span id="detailDiterima"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <!-- Modal Lihat Data Perangkat -->
+        <div class="modal fade" id="lihatDetailKomputerModal" tabindex="-1" aria-labelledby="lihatDetailKomputerLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lihatDetailKomputerLabel">Detail Komputer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Cabang:</strong> <span id="detailCabang"></span></p>
+                        <p><strong>Perangkat:</strong> <span id="detailPerangkat"></span></p>
+                        <p><strong>Merk:</strong> <span id="detailMerk"></span></p>
+                        <p><strong>Jumlah:</strong> <span id="detailJumlah"></span></p>
+                        <p><strong>Kondisi:</strong> <span id="detailKondisi"></span></p>
+                        <p><strong>Keterangan:</strong> <span id="detailKeterangan"></span></p>
+                        <p><strong>Di Terima:</strong> <span id="detailDiterima"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
     </div>
 
-   <script>
-    // Fungsi untuk menampilkan modal lihat komputer
-    function lihatDetailKomputerModal(cabang, perangkat, merk, jumlah, kondisi, keterangan, diterima) {
-        $('#lihatCabang').text(cabang);
-        $('#lihatPerangkat').text(perangkat);
-        $('#lihatMerk').text(merk);
-        $('#lihatJumlah').text(jumlah);
-        $('#lihatKondisi').text(kondisi);
-        $('#lihatKeterangan').text(keterangan);
-        $('#lihatDiterima').text(diterima);
-        $('#lihatDetailKomputerModal').modal('show');
-    }
+    <script>
+        // Fungsi untuk menampilkan modal lihat komputer
+        function lihatDetailKomputerModal(cabang, perangkat, merk, jumlah, kondisi, keterangan, diterima) {
+            $('#lihatCabang').text(cabang);
+            $('#lihatPerangkat').text(perangkat);
+            $('#lihatMerk').text(merk);
+            $('#lihatJumlah').text(jumlah);
+            $('#lihatKondisi').text(kondisi);
+            $('#lihatKeterangan').text(keterangan);
+            $('#lihatDiterima').text(diterima);
+            $('#lihatDetailKomputerModal').modal('show');
+        }
 
-    // Fungsi untuk menampilkan modal edit komputer
-    function editKomputer(cabang, perangkat, merk, jumlah, kondisi, keterangan, updateUrl) {
-        $('#editCabang').val(cabang);
-        $('#editPerangkat').val(perangkat);
-        $('#editMerk').val(merk);
-        $('#editJumlah').val(jumlah);
-        $('#editKondisi').val(kondisi);
-        $('#editKeterangan').val(keterangan);
-        $('#editKomputerForm').attr('action', updateUrl);
-        $('#editKomputerModal').modal('show');
-    }
+        // Fungsi untuk menampilkan modal edit komputer
+        function editKomputer(cabang, perangkat, merk, jumlah, kondisi, keterangan, updateUrl) {
+            $('#editCabang').val(cabang);
+            $('#editPerangkat').val(perangkat);
+            $('#editMerk').val(merk);
+            $('#editJumlah').val(jumlah);
+            $('#editKondisi').val(kondisi);
+            $('#editKeterangan').val(keterangan);
+            $('#editKomputerForm').attr('action', updateUrl);
+            $('#editKomputerModal').modal('show');
+        }
 
-    // Fungsi untuk menampilkan modal konfirmasi hapus
-    function konfirmasiHapusKomputer(deleteUrl) {
-        $('#hapusKomputerForm').attr('action', deleteUrl);
-        $('#hapusKomputerModal').modal('show');
-    }
-</script>
-
-
+        // Fungsi untuk menampilkan modal konfirmasi hapus
+        function konfirmasiHapusKomputer(deleteUrl) {
+            $('#hapusKomputerForm').attr('action', deleteUrl);
+            $('#hapusKomputerModal').modal('show');
+        }
+    </script>
 @endsection
