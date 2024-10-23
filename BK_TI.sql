@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Okt 2024 pada 19.02
+-- Waktu pembuatan: 23 Okt 2024 pada 10.09
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laravel`
+-- Database: `bk_ti`
 --
 
 -- --------------------------------------------------------
@@ -33,8 +33,8 @@ CREATE TABLE `berita_acaras` (
   `cabang_id` bigint(20) UNSIGNED NOT NULL,
   `NIP` varchar(255) NOT NULL,
   `merek` varchar(255) NOT NULL,
-  `service` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
+  `service` enum('install OS','service khusus','jaringan','full service') NOT NULL,
+  `status` enum('pending','selesai','dalam proses') NOT NULL,
   `keterangan` enum('bisa diambil','dikembalikan') DEFAULT NULL,
   `tgl_di_ambil` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -48,9 +48,9 @@ CREATE TABLE `berita_acaras` (
 --
 
 CREATE TABLE `cabangs` (
-  `No_Cabang` bigint(20) NOT NULL,
+  `No_Cabang` bigint(20) UNSIGNED NOT NULL,
   `Nama_Cabang` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `cabangs`
@@ -58,7 +58,7 @@ CREATE TABLE `cabangs` (
 
 INSERT INTO `cabangs` (`No_Cabang`, `Nama_Cabang`) VALUES
 (1, 'Kantor Pusat'),
-(100, 'Kantor Cabang Utama Palangka Raya'),
+(100, 'KCU Palangka Raya'),
 (101, 'Capem Pasar Baru'),
 (102, 'Capem Pasar Kahayan'),
 (103, 'Cabang Kuala Kurun'),
@@ -109,20 +109,7 @@ INSERT INTO `cabangs` (`No_Cabang`, `Nama_Cabang`) VALUES
 (600, 'Cabang Kuala Kapuas'),
 (601, 'Cabang Pulang Pisau'),
 (602, 'Capem Bahaur'),
-(603, 'Capem Timpah'),
-(987, 'Divisi Pemasaran'),
-(988, 'Divisi Umum'),
-(989, 'Divisi Strategy & Initiative Management Office'),
-(990, 'Divisi SDM dan Umum'),
-(991, 'Divisi Audit Intern'),
-(992, 'Divisi Perencana dan Corporate Secretary'),
-(993, 'Divisi Manajemen Risiko'),
-(994, 'Divisi Operasional dan Layanan'),
-(995, 'Divisi Bisnis'),
-(996, 'Divisi Kepatuhan'),
-(997, 'Divisi Treasury'),
-(998, 'Divisi Akuntansi'),
-(999, 'Divisi Teknologi Informasi');
+(603, 'Capem Timpah');
 
 -- --------------------------------------------------------
 
@@ -135,14 +122,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('ada|127.0.0.1', 'i:1;', 1728484047),
-('ada|127.0.0.1:timer', 'i:1728484047;', 1728484047);
 
 -- --------------------------------------------------------
 
@@ -216,12 +195,21 @@ CREATE TABLE `job_batches` (
 CREATE TABLE `komputers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `cabang_id` bigint(20) UNSIGNED NOT NULL,
+  `perangkat` enum('PC','Laptop','Printer') NOT NULL,
+  `merk` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `kondisi` enum('baru','second') NOT NULL,
+  `kondisi` enum('baru','baru rakitan','second') NOT NULL,
   `keterangan` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `diterima` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `komputers`
+--
+
+INSERT INTO `komputers` (`id`, `cabang_id`, `perangkat`, `merk`, `jumlah`, `kondisi`, `keterangan`, `diterima`) VALUES
+(2, 100, 'PC', 'Dell', 2, 'baru', 'Tidak ada keterangan', '2024-10-23 07:32:56'),
+(5, 104, 'PC', 'j', 1, 'second', NULL, '2024-10-23 00:42:32');
 
 -- --------------------------------------------------------
 
@@ -240,13 +228,13 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_10_02_071635_create_cabang_table', 2),
-(5, '2024_10_03_034822_create_komputers_table', 3),
-(7, '2024_10_03_041015_create_services_table', 4),
-(8, '2024_10_03_091138_create__berita_acara_table', 5);
+(12, '0001_01_01_000000_create_users_table', 1),
+(13, '0001_01_01_000001_create_cache_table', 1),
+(14, '0001_01_01_000002_create_jobs_table', 1),
+(15, '2024_10_02_071635_create_cabang_table', 1),
+(16, '2024_10_03_034822_create_komputers_table', 1),
+(17, '2024_10_03_041015_create_services_table', 1),
+(18, '2024_10_03_091138_create__berita_acara_table', 1);
 
 -- --------------------------------------------------------
 
@@ -285,7 +273,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('LSXRqVsdLsrETqb632XjfXCZBtFSgMHLgemZwqH7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYnJNaXg4b2RBVHVtNnozQ0FaeE5UUjZubG1NWlhEcmlseFBYaHh0MCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1729610270);
+('f2eEWtrAJck2vqFNgGjhATDRMKZvcKD1IPUckaxR', 123456789, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieU5BcEN1d2c5RUZWam10VER2b0Y0NENUek4yVG5obkNUNU5WdkFFcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rb21wdXRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjk6IjEyMzQ1Njc4OSI7fQ==', 1729658257),
+('mf0p6hf3IYd9oPgADtQRK2Ky3LQA6ns9irE1LUgB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS0l6cHJ6cWpyaUlQcFFpcW9LYkNzT3hvYW5ic0NSdXVRYmpaYm1ZRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rb21wdXRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1729670627);
 
 -- --------------------------------------------------------
 
@@ -307,8 +296,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`NIP`, `Nama_Staff`, `Role`, `password`, `created_at`, `updated_at`) VALUES
-('123456789', 'admin', 'admin', '$2y$12$uJH1ut1vbDsLRna/pMS5MOB8.q.uTzaRqb3SQITqBglz1KZipn1Ey', '2024-10-11 02:31:35', '2024-10-11 02:31:35'),
-('2354548', 'staff', 'staff', '$2y$12$XBQJ1DJVEmJeFSLh4C1fRup4TwWd6olnUox.6uwgA5pY5z.LL5Dma', '2024-10-20 20:17:50', '2024-10-20 20:23:14');
+('1', 'admin', 'admin', '$2y$12$TGPdq6xtpbD.W1LMp14E.uIi98Z6atPT0oXz.mANGmGzBHEPQhUna', '2024-10-22 20:29:51', '2024-10-22 20:29:51');
 
 --
 -- Indexes for dumped tables
@@ -365,8 +353,7 @@ ALTER TABLE `job_batches`
 -- Indeks untuk tabel `komputers`
 --
 ALTER TABLE `komputers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `komputers_cabang_id_foreign` (`cabang_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `migrations`
@@ -403,7 +390,7 @@ ALTER TABLE `berita_acaras`
 -- AUTO_INCREMENT untuk tabel `cabangs`
 --
 ALTER TABLE `cabangs`
-  MODIFY `No_Cabang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+  MODIFY `No_Cabang` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=604;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -421,13 +408,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `komputers`
 --
 ALTER TABLE `komputers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `services`
@@ -443,6 +430,7 @@ ALTER TABLE `services`
 -- Ketidakleluasaan untuk tabel `berita_acaras`
 --
 ALTER TABLE `berita_acaras`
+  ADD CONSTRAINT `berita_acaras_cabang_id_foreign` FOREIGN KEY (`cabang_id`) REFERENCES `cabangs` (`No_Cabang`) ON DELETE CASCADE,
   ADD CONSTRAINT `berita_acaras_komputer_id_foreign` FOREIGN KEY (`komputer_id`) REFERENCES `komputers` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `berita_acaras_nip_foreign` FOREIGN KEY (`NIP`) REFERENCES `users` (`NIP`) ON DELETE CASCADE;
 
@@ -450,6 +438,7 @@ ALTER TABLE `berita_acaras`
 -- Ketidakleluasaan untuk tabel `services`
 --
 ALTER TABLE `services`
+  ADD CONSTRAINT `services_cabang_id_foreign` FOREIGN KEY (`Cabang_ID`) REFERENCES `cabangs` (`No_Cabang`) ON DELETE CASCADE,
   ADD CONSTRAINT `services_komputer_id_foreign` FOREIGN KEY (`Komputer_ID`) REFERENCES `komputers` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `services_nip_foreign` FOREIGN KEY (`NIP`) REFERENCES `users` (`NIP`) ON DELETE CASCADE;
 COMMIT;
