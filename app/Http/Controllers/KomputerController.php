@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Komputer;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
+
 
 class KomputerController extends Controller
 {
@@ -22,35 +26,44 @@ class KomputerController extends Controller
         return view('komputers.create', compact('cabangs'));
     }
 
-    // Menyimpan data komputer baru
-    public function store(Request $request)
-    {
-        // Validasi data yang dikirim dari form
-        $validated = $request->validate([
-            'cabang_id' => 'required|exists:cabangs,No_Cabang', // pastikan cabang_id cocok dengan No_Cabang
-            'perangkat' => 'required|in:PC,Laptop,Printer', // perangkat harus salah satu dari nilai enum
-            'merk' => 'required|string|max:255', // pastikan merk adalah string
-            'jumlah' => 'required|integer|min:1', // jumlah harus integer dan lebih dari 0
-            'kondisi' => 'required|in:baru,baru rakitan,second', // pastikan kondisi salah satu dari enum
-            'keterangan' => 'nullable|string', // keterangan opsional
-        ]);
 
-        // Tambahkan waktu diterima secara otomatis
-        $validated['diterima'] = now();
+public function store(Request $request)
+{
+    // Validate and prepare data
+    $validated = $request->validate([
+        'cabang_id' => 'required|exists:cabangs,No_Cabang',
+        'perangkat' => 'required|in:PC,Laptop,Printer',
+        'merk' => 'required|string|max:255',
+        'jumlah' => 'required|integer|min:1',
+        'kondisi' => 'required|in:baru,baru rakitan,second',
+        'keterangan' => 'nullable|string',
+    ]);
 
-        // Simpan data ke database
-        Komputer::create($validated);
+    $validated['keterangan'] = $validated['keterangan'] ?? 'Tidak Ada';
+// Create a DateTime object with the 'Asia/Jakarta' timezone
+$tempdata = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
 
-        // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('komputers.index')->with('success', 'Data perangkat berhasil disimpan.');
-    }
+// Set the 'diterima' field with the formatted date and time
+$validated['diterima'] = $tempdata->format('Y-m-d H:i:s');
+
+// Get the current date and time as a string for output
+$currentDate = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+echo $currentDate->format('Y-m-d H:i:s');
+
+    // Save data to the database
+    Komputer::create($validated);
+
+    // Redirect with a success message
+    return redirect()->route('komputers.index')->with('success', 'Data perangkat berhasil disimpan.');
+}
+
 
     // Menampilkan data komputer berdasarkan ID
     public function show($id)
-{
-    $komputer = Komputer::findOrFail($id);
-    return view('komputers.show', compact('komputer'));
-}
+    {
+        $komputer = Komputer::findOrFail($id);
+        return view('komputers.show', compact('komputer'));
+    }
 
     // Menampilkan form untuk mengedit data komputer
     public function edit($id)
@@ -87,5 +100,15 @@ class KomputerController extends Controller
 
         // Redirect ke index dengan pesan sukses
         return redirect()->route('komputers.index')->with('success', 'Komputer berhasil dihapus.');
+    }
+
+    public function dashboard()
+    {
+        // Example: Retrieve all Komputers and Cabangs for the dashboard
+        $komputers = Komputer::all();
+        $cabangs = \App\Models\Cabang::all();
+
+        // Pass the data to a dashboard view
+        return view('dashboard', compact('komputers', 'cabangs'));
     }
 }

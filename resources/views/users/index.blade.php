@@ -59,29 +59,28 @@
                                 <td>{{ $user->Role }}</td>
                                 <td>
                                     <!-- Tombol Lihat -->
-                                    <a href="javascript:void(0)" class="btn btn-info btn-sm p-1"
-                                        title="Lihat"
+                                    <a href="javascript:void(0)" class="btn btn-info btn-sm p-1" title="Lihat"
                                         onclick="lihatUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}')">
                                         <i class="ti-eye" style="font-size: 14px;"></i> <!-- Ikon Themify untuk "Lihat" -->
                                     </a>
 
                                     <!-- Tombol Edit -->
-                                    <a href="javascript:void(0)" class="btn btn-warning btn-sm p-1"
-                                        title="Edit"
+                                    <a href="javascript:void(0)" class="btn btn-warning btn-sm p-1" title="Edit"
                                         onclick="editUser('{{ $user->Nama_Staff }}', '{{ $user->NIP }}', '{{ $user->Role }}', '{{ route('users.update', $user->NIP) }}')">
                                         <i class="ti-pencil" style="font-size: 14px;"></i>
                                         <!-- Ikon Themify untuk "Edit" -->
                                     </a>
 
-                                    <!-- Tombol Hapus -->
-                                    <form action="{{ route('users.destroy', $user->NIP) }}" method="POST"
-                                        style="display:inline;">
+                                    <!-- Tombol Hapus -->                   
+                                    <form action="javascript:void(0);" method="POST" style="display:inline;"
+                                        id="form-hapus-{{ $user->NIP }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm p-1" title="Hapus">
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm p-1" title="Hapus"
+                                            onclick="konfirmasiHapus('{{ route('users.destroy', $user->NIP) }}')">
                                             <i class="ti-trash" style="font-size: 14px;"></i>
                                             <!-- Ikon Themify untuk "Hapus" -->
-                                        </button>
+                                        </a>
                                     </form>
                                 </td>
                         @endforeach
@@ -132,32 +131,39 @@
                     </div>
                 </div>
             </div>
+
             <!-- Modal Lihat User -->
-              <!-- Modal Lihat Data Perangkat -->
-        <div class="modal fade" id="lihatDetailModal" tabindex="-1" aria-labelledby="lihatDetailLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="lihatDetailLabel">Detail Perangkat</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Cabang:</strong> <span id="detailCabang"></span></p>
-                        <p><strong>Perangkat:</strong> <span id="detailPerangkat"></span></p>
-                        <p><strong>Merk:</strong> <span id="detailMerk"></span></p>
-                        <p><strong>Jumlah:</strong> <span id="detailJumlah"></span></p>
-                        <p><strong>Kondisi:</strong> <span id="detailKondisi"></span></p>
-                        <p><strong>Keterangan:</strong> <span id="detailKeterangan"></span></p>
-                        <p><strong>Di Terima:</strong> <span id="detailDiterima"></span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <div class="modal fade" id="lihatUserModal" tabindex="-1" role="dialog"
+                aria-labelledby="lihatUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="lihatUserModalLabel">Detail User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="lihatNama_Staff">Nama Staff</label>
+                                <input type="text" class="form-control" id="lihatNama_Staff" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="lihatNIP">NIP</label>
+                                <input type="text" class="form-control" id="lihatNIP" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="lihatRole">Role</label>
+                                <input type="text" class="form-control" id="lihatRole" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
             <!-- Modal Edit User -->
             <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
                 aria-labelledby="editUserModalLabel" aria-hidden="true">
@@ -203,6 +209,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Modal Konfirmasi Hapus -->
             <div class="modal fade" id="hapusUserModal" tabindex="-1" role="dialog"
                 aria-labelledby="hapusUserModalLabel" aria-hidden="true">
